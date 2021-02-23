@@ -1,6 +1,6 @@
 {
-"companyName": "Bravo7",
-"productName": "MakePandemicGreatAgain",
+"companyName": "DefaultCompany",
+"productName": "Bravo 7",
 "productVersion": "0.1",
 "dataUrl": "WebGL.data.unityweb",
 "wasmCodeUrl": "WebGL.wasm.code.unityweb",
