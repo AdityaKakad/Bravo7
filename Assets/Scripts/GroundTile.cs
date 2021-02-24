@@ -51,7 +51,18 @@ public class GroundTile : MonoBehaviour
         int obstacleSpawnIndex = Random.Range(lowerBound, upperBound);
         Transform spawnPoint = transform.GetChild(obstacleSpawnIndex).transform;
         Vector3 position = new Vector3(spawnPoint.position.x, 0.6f, spawnPoint.position.z);
-        Instantiate(obstacleToSpawn, position, Quaternion.identity, transform);
+
+
+        if (GameManager.inst.score < 10)
+        {
+            int probObstacle = Random.Range(0, 2);
+            if (probObstacle >= 1)
+                Instantiate(obstacleToSpawn, position, Quaternion.identity, transform);
+        }
+        else
+        {
+            Instantiate(obstacleToSpawn, position, Quaternion.identity, transform);
+        }
 
         int obstacleLimit = Random.Range(1, this.obstaclesToSpawn);
         if (obstacleLimit > 1 && GameManager.inst.score > 200)
@@ -69,9 +80,9 @@ public class GroundTile : MonoBehaviour
     public GameObject syringePrefab;
     public GameObject coinPrefab;
     public GameObject mysteryPrefab;
-    public float syringeChance = 0.5f;
-    public float maskChance = 0.3f;
-    public float mysteryChance = 0.1f;
+    public float syringeChance = 0.35f;
+    public float maskChance = 0.2f;
+    public float mysteryChance = 0.05f;
     public GameObject rightExtent;
     public GameObject leftExtent;
     public GameObject aheadExtent;
