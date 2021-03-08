@@ -5,8 +5,8 @@ using UnityEngine;
 public class MysteryBox : MonoBehaviour
 {
     public float turnSpeed = 90f;
-    public string[] powerUp = { "+5 masks", "+5 syringes", "+100 points", "Role switch!", "Oh no! -50 points!", 
-        "Superman Drive", "Vaccinated! +1 life!" };
+    public static string[] powerUp = { "+5 masks", "+5 syringes", "+30 points", "Role switch!", "Oh no! -20 points!", 
+        "Superman Drive", "Vaccinated! +1 life!", "Oh no! -5 masks!", "Oh no! -5 syringes!"};
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,7 +21,7 @@ public class MysteryBox : MonoBehaviour
         // check the object we collide with is the player
         if (other.gameObject.name != "Player") return;
 
-        float random = Random.Range(0f, 7f);
+        float random = Random.Range(0f, 9f);
         int idx = (int) Mathf.Floor(random);
         string power = powerUp[idx];
 
@@ -51,20 +51,26 @@ public class MysteryBox : MonoBehaviour
                 GameManager.inst.IncrementSyringe(5);
                 break;
             case 2:
-                GameManager.inst.IncrementScore(100);
+                GameManager.inst.IncrementScore(30);
                 break;
             case 3:
                 if(GameManager.inst.maskCount>0 && GameManager.inst.syringeCount>0) // human -> doctor 0M & 0SY
                     GameManager.inst.ChangeRole();
                 break;
             case 4:
-                GameManager.inst.DecrementScore(50);
+                GameManager.inst.DecrementScore(20);
                 break;
             case 5:
                 GameManager.inst.SetSuperManStamp();
                 break;
             case 6:
                 GameManager.inst.IncrementLives();
+                break;
+            case 7:
+                GameManager.inst.DecrementMask(5);
+                break;
+            case 8:
+                GameManager.inst.DecrementSyringe(5);
                 break;
         }
     }

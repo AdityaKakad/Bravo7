@@ -93,6 +93,24 @@ public class GameManager : MonoBehaviour
         else return false;
     }
 
+    public void DecrementMask(int value)
+    {
+        emptyMessage();
+        if (value < maskCount)
+        {
+            maskCount -= value;
+        }
+        else
+        {
+            maskCount = 0;
+            if (isDoctor) {
+                ChangeRole();
+            }
+        }
+
+        maskText.text = "Masks: " + maskCount;
+    }
+
     public void IncrementSyringe()
     {
         emptyMessage();
@@ -119,6 +137,24 @@ public class GameManager : MonoBehaviour
         syringeText.text = "Syringes: " + syringeCount;
         if (syringeCount > 0) return true;
         else return false;
+    }
+
+    public void DecrementSyringe(int value)
+    {
+        emptyMessage();
+        if (value < syringeCount)
+        {
+            syringeCount -= value;
+        }
+        else
+        {
+            syringeCount = 0;
+            if (isDoctor) {
+                ChangeRole();
+            }
+        }
+
+        syringeText.text = "Syringes: " + syringeCount;
     }
 
     public void IncrementLives()
