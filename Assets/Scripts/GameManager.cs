@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public Text roleText;
     public Text livesText;
     public Text guiText;
+    public Text flashText;
     public MovePlayer playerMovement;
     public DateTime superManEffectStamp = DateTime.MinValue;
     public int DOCTOR_POWER_POINT = 10;
@@ -100,8 +101,13 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    public void SetSuperManStamp()
+    public IEnumerator SetSuperManStamp()
     {
+        
+        flashText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(7);
+        flashText.text = "SUPERMAN DRIVE ACTIVE!";
+        flashText.gameObject.SetActive(false);
         GameManager.inst.supermanCount++;
         superManEffectStamp = DateTime.Now.AddSeconds(7);
     }
