@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     public int maskCount = 0;
     public int syringeCount = 0;
     public int livesLeft = 0;
+    public int coinsCollectedPerGame = 0;
+    public DateTime gameStartTime;
     public bool isDoctor = false;
     public string role = "HUMAN";
     public static GameManager inst;
@@ -22,9 +25,30 @@ public class GameManager : MonoBehaviour
     public MovePlayer playerMovement;
     public DateTime superManEffectStamp = DateTime.MinValue;
     public int DOCTOR_POWER_POINT = 10;
+    public int doctorModePoints = 0;
+    public bool gameStart = true;
+    public int docMasks;
+    public int docSyringes;
+    public DateTime docStartTime;
+    public int docTimeSeconds = 0;
+    public int cumulativeDocPoints = 0;
+    public int cumulativeSupermanPoints = 0;
+    public int supermanCount = 0;
+    public int pointsPerLife = 0;
 
     public void IncrementScore()
     {
+        GameManager.inst.pointsPerLife++;
+        if (DateTime.Now <= GameManager.inst.superManEffectStamp)
+        {
+            GameManager.inst.cumulativeSupermanPoints++;
+        }
+
+        if (isDoctor)
+        {
+            GameManager.inst.doctorModePoints++;
+        }
+
         emptyMessage();
         score++;
         //TODO: change point divisor to 100
@@ -34,6 +58,17 @@ public class GameManager : MonoBehaviour
 
     public void IncrementScore(int value)
     {
+        GameManager.inst.pointsPerLife += value;
+        if (DateTime.Now <= GameManager.inst.superManEffectStamp)
+        {
+            GameManager.inst.cumulativeSupermanPoints += value;
+        }
+
+        if(isDoctor)
+        {
+            GameManager.inst.doctorModePoints += value;
+        }
+
         emptyMessage();
         score+= value;
         //TODO: change point divisor to 100
@@ -43,6 +78,17 @@ public class GameManager : MonoBehaviour
 
     public void DecrementScore(int value)
     {
+        GameManager.inst.pointsPerLife -= value;
+        if (DateTime.Now <= GameManager.inst.superManEffectStamp)
+        {
+            GameManager.inst.cumulativeSupermanPoints -= value;
+        }
+
+        if (isDoctor)
+        {
+            GameManager.inst.doctorModePoints -= value;
+        }
+
         if (value < score)
         {
             score -= value;
@@ -56,6 +102,7 @@ public class GameManager : MonoBehaviour
 
     public void SetSuperManStamp()
     {
+        GameManager.inst.supermanCount++;
         superManEffectStamp = DateTime.Now.AddSeconds(7);
     }
 
@@ -173,11 +220,18 @@ public class GameManager : MonoBehaviour
 
     public bool DecrementLives()
     {
+        Analytics.CustomEvent("Life Lost", new Dictionary<string, object>
+              {
+                { "Lives remaining", GameManager.inst.livesLeft },
+                { "Points Earned", GameManager.inst.pointsPerLife },
+              });
+
         if (livesLeft > 1)
             livesLeft--;
         else
             return false;
-
+        
+        GameManager.inst.pointsPerLife = 0;
         livesText.text = "Lives left: " + livesLeft;
         return true;
     }
@@ -188,8 +242,37 @@ public class GameManager : MonoBehaviour
         if (isDoctor)
         {
             role = "DOCTOR";
+            docStartTime = DateTime.Now;
+            Analytics.CustomEvent("Doctor switch", new Dictionary<string, object>
+              {
+                { "mask", GameManager.inst.maskCount },
+                { "syringes", GameManager.inst.syringeCount },
+              });
+            docMasks = GameManager.inst.maskCount;
+            docSyringes = GameManager.inst.syringeCount;
         } else
         {
+            if (gameStart)
+            {
+                gameStart = !gameStart;
+            }
+            else
+            {
+                DateTime docEndTime = DateTime.Now;
+                int seconds = (int)System.Math.Abs((GameManager.inst.docStartTime - docEndTime).TotalSeconds);
+                GameManager.inst.docTimeSeconds += seconds;
+
+                Analytics.CustomEvent("Human switch", new Dictionary<string, object>
+                  {
+                    { "mask", GameManager.inst.docMasks },
+                    { "syringes", GameManager.inst.docSyringes },
+                    { "points", GameManager.inst.doctorModePoints }
+                  });
+                GameManager.inst.cumulativeDocPoints += GameManager.inst.doctorModePoints;
+                GameManager.inst.doctorModePoints = 0;
+                GameManager.inst.docMasks = 0;
+                GameManager.inst.docSyringes = 0;
+            }
             role = "HUMAN";
         }
 

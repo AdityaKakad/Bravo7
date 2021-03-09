@@ -20,6 +20,7 @@ public class Coin : MonoBehaviour
 
         // Add to the player's score
         GameManager.inst.IncrementScore();
+        GameManager.inst.coinsCollectedPerGame++;
 
         // Destroy the mask object
         Destroy(gameObject);

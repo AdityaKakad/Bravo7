@@ -1,6 +1,9 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
+using System.Collections.Generic;
+using System;
 
 public class MovePlayer : MonoBehaviour
 {
@@ -20,6 +23,12 @@ public class MovePlayer : MonoBehaviour
 
     private void Start()
     {
+        GameManager.inst.gameStartTime = DateTime.Now;
+        GameManager.inst.docTimeSeconds = 0;
+        GameManager.inst.doctorModePoints = 0;
+        GameManager.inst.cumulativeDocPoints = 0;
+        GameManager.inst.cumulativeSupermanPoints = 0;
+        GameManager.inst.supermanCount = 0;
         renderer = GetComponent<Renderer>();
         JumpCount = MaxJumps;
     }
@@ -52,6 +61,22 @@ public class MovePlayer : MonoBehaviour
         alive = false;
         Debug.Log("Game over. Show final score!");
         PlayerPrefs.SetInt("CurrentScore", GameManager.inst.score);
+
+        DateTime endTime = DateTime.Now;
+        int seconds = (int)System.Math.Abs((GameManager.inst.gameStartTime - endTime).TotalSeconds);
+        Analytics.CustomEvent("Game Statistics", new Dictionary<string, object>
+          {
+            { "coins", GameManager.inst.coinsCollectedPerGame},
+            { "sessionLength", seconds },
+            { "total points", GameManager.inst.score},
+            { "doctor time", GameManager.inst.docTimeSeconds },
+            { "human time", seconds - GameManager.inst.docTimeSeconds },
+            { "doctor points", GameManager.inst.cumulativeDocPoints },
+            { "human points", GameManager.inst.score - GameManager.inst.cumulativeDocPoints },
+            { "superman count", GameManager.inst.supermanCount },
+            { "superman points", GameManager.inst.cumulativeSupermanPoints }
+          });
+        GameManager.inst.coinsCollectedPerGame = 0;
         SceneManager.LoadScene("EndGame");
     }
 
