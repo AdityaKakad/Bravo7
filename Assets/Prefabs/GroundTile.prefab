@@ -256,9 +256,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupsToSpawn: 3
-  batPrefab: {fileID: 5497088392232477420, guid: 0c50820be27e744cb81b77f9744b7004,
+  batPrefab: {fileID: 2967025858470475304, guid: f485b369d932f7c4a972b1cfd8b2c65c,
     type: 3}
-  peoplePrefab: {fileID: 1416554023858954851, guid: b9abb067a0c6f4d659d4c67498ee187a,
+  peoplePrefab: {fileID: 2967025858470475304, guid: acc048143e0cf68468ec6da496988862,
     type: 3}
   batChance: 0.2
   peopleChance: 0.4
