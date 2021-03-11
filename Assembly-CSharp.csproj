@@ -67,6 +67,8 @@
     <Compile Include="Assets\Input\ArrowKeysDetector.cs" />
     <Compile Include="Assets\Input\IInputDetector.cs" />
     <Compile Include="Assets\Input\SwipeDetector.cs" />
+    <Compile Include="Assets\Prefabs\BasicBandit\DemoSceneBasicBandit\Scripts\ButtonFunction.cs" />
+    <Compile Include="Assets\Prefabs\BasicBandit\DemoSceneBasicBandit\Scripts\MovementCamera.cs" />
     <Compile Include="Assets\Scripts\BackgroundMusic.cs" />
     <Compile Include="Assets\Scripts\Bat.cs" />
     <Compile Include="Assets\Scripts\Coin.cs" />
