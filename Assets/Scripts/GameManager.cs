@@ -101,13 +101,13 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    public IEnumerator SetSuperManStamp()
+    public void SetSuperManStamp()
     {
         
-        flashText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(7);
-        flashText.text = "SUPERMAN DRIVE ACTIVE!";
-        flashText.gameObject.SetActive(false);
+        //flashText.gameObject.SetActive(true);
+        //yield return new WaitForSeconds(7);
+        //flashText.text = "SUPERMAN DRIVE ACTIVE!";
+        //flashText.gameObject.SetActive(false);
         GameManager.inst.supermanCount++;
         superManEffectStamp = DateTime.Now.AddSeconds(7);
     }
@@ -305,6 +305,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (GetSuperManStamp() < DateTime.Now) {
+            flashText.text = "";
+        }
+        else {
+            flashText.text = "SUPERMAN DRIVE ACTIVE!" + " " + (GetSuperManStamp() - DateTime.Now).TotalSeconds;
+        }
     }
 }
