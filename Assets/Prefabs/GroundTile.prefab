@@ -261,12 +261,12 @@ MonoBehaviour:
     type: 3}
   batChance: 0.2
   peopleChance: 0.4
-  obstaclePrefab: {fileID: 2967025858470475304, guid: 1d6f382ffaecd40abaa15c47942400a7,
+  obstaclePrefab: {fileID: 1067925524328404, guid: 6bbfea6690ef7724ba495c866081f855,
     type: 3}
   obstaclesToSpawn: 3
   maskPrefab: {fileID: 3969026384833104512, guid: 13fb455f5c69ccc4c87feb35091ed0be,
     type: 3}
-  syringePrefab: {fileID: 3013271967029255879, guid: f898d006d77a04546aa63147558f9eaa,
+  syringePrefab: {fileID: 3013271967029255879, guid: 18ea5314626d29f44a9e03e2ef723594,
     type: 3}
   coinPrefab: {fileID: 3969026384833104512, guid: f32f9ef12014e504a8fa9467a97cd39a,
     type: 3}
