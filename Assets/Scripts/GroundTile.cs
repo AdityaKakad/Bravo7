@@ -46,22 +46,20 @@ public class GroundTile : MonoBehaviour
 
         int lowerBound = tileSpawnIndex*3 + 1;
         int upperBound = tileSpawnIndex*3 + 4;
-        
         //Choosing rand point for obstacle
         int obstacleSpawnIndex = Random.Range(lowerBound, upperBound);
         Transform spawnPoint = transform.GetChild(obstacleSpawnIndex).transform;
         Vector3 position = new Vector3(spawnPoint.position.x, 0.6f, spawnPoint.position.z);
 
-
         if (GameManager.inst.score < 10)
         {
             int probObstacle = Random.Range(0, 2);
             if (probObstacle >= 1)
-                Instantiate(obstacleToSpawn, position, Quaternion.identity, transform);
+                Instantiate(obstacleToSpawn, position, obstacleToSpawn.transform.rotation, transform);
         }
         else
         {
-            Instantiate(obstacleToSpawn, position, Quaternion.identity, transform);
+            Instantiate(obstacleToSpawn, position, obstacleToSpawn.transform.rotation, transform);
         }
 
         int obstacleLimit = Random.Range(1, this.obstaclesToSpawn);
@@ -72,7 +70,7 @@ public class GroundTile : MonoBehaviour
             Vector3 secondPosition = new Vector3(secondSpawnPoint.position.x, 0.6f, secondSpawnPoint.position.z);
             if (position == secondPosition) return;
             // can make the obstacle random too
-            Instantiate(batPrefab, secondPosition, Quaternion.identity, transform);
+            Instantiate(batPrefab, secondPosition, obstacleToSpawn.transform.rotation, transform);
         }
     }
 
