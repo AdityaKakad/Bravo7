@@ -7,17 +7,6 @@ public class GameOverScore : MonoBehaviour
 {
     public Text finalScoreText;
     public Text highScoreText;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void Awake()
     {
@@ -29,5 +18,10 @@ public class GameOverScore : MonoBehaviour
             PlayerPrefs.SetInt("HighScore", score);
         }
         highScoreText.text = "High Score: " + highScore + "!";
+        string name = PlayerPrefs.GetString("PlayerName", "Anonymous").ToString();
+        if(name != "Anonymous")
+        {
+            Highscores.AddNewHighscore(name, score);
+        }
     }
 }
