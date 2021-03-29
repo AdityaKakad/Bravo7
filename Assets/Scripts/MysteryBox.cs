@@ -23,6 +23,39 @@ public class MysteryBox : MonoBehaviour
 
         float random = Random.Range(0f, 9f);
         int idx = (int) Mathf.Floor(random);
+
+        //alter mystery box probability based on in-game situation
+        if (GameManager.inst.livesLeft == 1) { 
+            //if only one life left, increase probability of superman drive and vaccination
+            if (idx != 5 && idx != 6) {
+                if (random-idx >= 0.8) {
+                    idx = 6;
+                }
+                else if (random-idx >= 0.7) {
+                    idx = 5;
+                }
+            }
+        }
+        else if (!GameManager.inst.isDoctor && GameManager.inst.maskCount+GameManager.inst.syringeCount >= 20) { 
+            //increase doctor mode probability if mask and syringe count is high
+            if (idx != 3) {
+                if (random-idx >= 0.75) {
+                    idx = 3;
+                }
+            }
+        }
+        else if (!GameManager.inst.isDoctor && GameManager.inst.maskCount+GameManager.inst.syringeCount < 10) { 
+            //increase +5 masks/syringe prob if low masks/syringes
+            if (idx != 0 && idx != 1) {
+                if (random-idx >= 0.9) {
+                    idx = 1;
+                }
+                else if (random-idx >= 0.8) {
+                    idx = 0;
+                }
+            }
+        }
+
         string power = powerUp[idx];
 
         MysteryBoxLogic(idx);

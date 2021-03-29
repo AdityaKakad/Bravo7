@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public int maskCount = 0;
     public int syringeCount = 0;
     public int livesLeft = 0;
+    public GameObject heart1;
+    public GameObject heart2;
+    public GameObject heart3;
     public int coinsCollectedPerGame = 0;
     public DateTime gameStartTime;
     public bool isDoctor = false;
@@ -53,7 +56,9 @@ public class GameManager : MonoBehaviour
         emptyMessage();
         score++;
         //TODO: change point divisor to 100
-        playerMovement.speed = playerMovement.startSpeed + (score / 100) * playerMovement.speedIncreasePer100Points;
+        if (score <= 500) {
+            playerMovement.speed = playerMovement.startSpeed + (score / 100) * playerMovement.speedIncreasePer100Points;
+        }
         scoreText.text = "Score: " + score;
     }
 
@@ -213,9 +218,15 @@ public class GameManager : MonoBehaviour
     public void IncrementLives()
     {
         emptyMessage();
-        if (livesLeft<3)
+        if (livesLeft<3) {
+            if (livesLeft == 2) {
+                heart1.GetComponent<Image>().color = Color.red;
+            }
+            else if (livesLeft == 1) {
+                heart2.GetComponent<Image>().color = Color.red;
+            }
             livesLeft++;
-
+        }
         livesText.text = "Lives left: " + livesLeft;
     }
 
@@ -232,8 +243,15 @@ public class GameManager : MonoBehaviour
                 { "Points Earned", GameManager.inst.pointsPerLife },
               });
 
-        if (livesLeft > 1)
+        if (livesLeft > 1) {
+            if (livesLeft == 3) {
+                heart1.GetComponent<Image>().color = Color.grey;
+            }
+            else if (livesLeft == 2) {
+                heart2.GetComponent<Image>().color = Color.grey;
+            }
             livesLeft--;
+        }
         else
             return false;
         
@@ -301,7 +319,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

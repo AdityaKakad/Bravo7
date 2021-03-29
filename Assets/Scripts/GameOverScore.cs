@@ -10,7 +10,8 @@ public class GameOverScore : MonoBehaviour
 
     private void Awake()
     {
-        int score = PlayerPrefs.GetInt("CurrentScore", 0);
+        //final score = score + 2*mask + 2*syringes
+        int score = PlayerPrefs.GetInt("CurrentScore", 0) + 2*PlayerPrefs.GetInt("CurrentMaskCount", 0) + 2*PlayerPrefs.GetInt("CurrentSyringeCount", 0);
         finalScoreText.text = "Final Score: " + score + "!";
         int highScore = PlayerPrefs.GetInt("HighScore", 0);
         if(highScore <= score) {

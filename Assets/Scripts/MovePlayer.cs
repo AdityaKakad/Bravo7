@@ -8,8 +8,8 @@ using System;
 public class MovePlayer : MonoBehaviour
 {
     bool alive = true;
-    public float startSpeed = 8;
-    public float speed = 8;
+    public float startSpeed = 5; //initially set to 8
+    public float speed = 5; //initially set to 8
     public Rigidbody rb;
     public Renderer renderer;
     int JumpCount = 0;
@@ -18,7 +18,7 @@ public class MovePlayer : MonoBehaviour
     float horizontalInput;
     public float horizontalMultiplier = 30;
     public float jumpForce = 7f;
-    public float speedIncreasePer100Points = 1f;
+    public float speedIncreasePer100Points = 0.5f; //initially set to 1f
     public LayerMask groundMask;
 
     private void Start()
@@ -61,6 +61,8 @@ public class MovePlayer : MonoBehaviour
         alive = false;
         Debug.Log("Game over. Show final score!");
         PlayerPrefs.SetInt("CurrentScore", GameManager.inst.score);
+        PlayerPrefs.SetInt("CurrentMaskCount", GameManager.inst.maskCount);
+        PlayerPrefs.SetInt("CurrentSyringeCount", GameManager.inst.syringeCount);
 
         DateTime endTime = DateTime.Now;
         int seconds = (int)System.Math.Abs((GameManager.inst.gameStartTime - endTime).TotalSeconds);
