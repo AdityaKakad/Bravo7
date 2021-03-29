@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+
 public class Highscores : MonoBehaviour
 {
-
-	const string privateCode = "Gf9B1vbb1kGsPKcpH53qOwJ4QLSY7f606gYxdahmaN1w";
-	const string publicCode = "6060fb7f8f421366b0545c75";
-	const string webURL = "http://dreamlo.com/lb/";
+	const string serverURL = "https://avian-casing-309102.wl.r.appspot.com/";
 
 	DisplayHighscores highscoreDisplay;
 	public Highscore[] highscoresList;
@@ -28,7 +27,8 @@ public class Highscores : MonoBehaviour
 
 	IEnumerator UploadNewHighscore(string username, int score)
 	{
-		WWW www = new WWW(webURL + privateCode + "/add/" + WWW.EscapeURL(username) + "/" + score);
+		//WWW www = new WWW(webURL + privateCode + "/add/" + WWW.EscapeURL(username) + "/" + score);
+		WWW www = new WWW(serverURL + "send" + "?name=" + WWW.EscapeURL(username) + "&score=" + score);
 		yield return www;
 
 		if (string.IsNullOrEmpty(www.error))
@@ -49,7 +49,7 @@ public class Highscores : MonoBehaviour
 
 	IEnumerator DownloadHighscoresFromDatabase()
 	{
-		WWW www = new WWW(webURL + publicCode + "/pipe/");
+		WWW www = new WWW(serverURL+"receive");
 		yield return www;
 
 		if (string.IsNullOrEmpty(www.error))
