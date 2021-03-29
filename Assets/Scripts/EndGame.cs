@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class EndGame : MonoBehaviour
 {
+    public AudioSource source;
     public void GoToMenu()
     {
         SceneManager.LoadScene("Menu");
@@ -14,5 +15,14 @@ public class EndGame : MonoBehaviour
     public void PlayAgain()
     {
         SceneManager.LoadScene("MainGame");
+    }
+
+    private void Awake()
+    {
+        float audioVal = PlayerPrefs.GetFloat("AudioValue", 0.5f);
+        if (source != null)
+        {
+            source.volume = audioVal;
+        }
     }
 }

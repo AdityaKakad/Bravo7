@@ -11,7 +11,7 @@ public class MovePlayer : MonoBehaviour
     public float startSpeed = 5; //initially set to 8
     public float speed = 5; //initially set to 8
     public Rigidbody rb;
-    public Renderer renderer;
+    public SkinnedMeshRenderer renderer;
     int JumpCount = 0;
     public int MaxJumps = 1; //Maximum amount of jumps (i.e. 2 for double jumps)
 
@@ -29,7 +29,7 @@ public class MovePlayer : MonoBehaviour
         GameManager.inst.cumulativeDocPoints = 0;
         GameManager.inst.cumulativeSupermanPoints = 0;
         GameManager.inst.supermanCount = 0;
-        renderer = GetComponent<Renderer>();
+        renderer = this.GetComponentInChildren<SkinnedMeshRenderer>();
         JumpCount = MaxJumps;
     }
 
@@ -96,7 +96,7 @@ public class MovePlayer : MonoBehaviour
     public void ChangeColor()
     {
         if (GameManager.inst.isDoctor)
-            renderer.material.SetColor("_Color", Color.black);
+            renderer.material.SetColor("_Color", Color.yellow);
         else
             renderer.material.SetColor("_Color", Color.white);
     }

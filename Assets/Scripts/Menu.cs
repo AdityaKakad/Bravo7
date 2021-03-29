@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    public Text Instructions;
     public Text highScoreText;
     public Text playerName;
+    public AudioSource source;
+
     public void PlayGame()
     {
         SceneManager.LoadScene("MainGame");
@@ -43,6 +44,11 @@ public class Menu : MonoBehaviour
         Text high = GameObject.Find("HighScoreCard").GetComponent<Text>();
         string asd = PlayerPrefs.GetInt("HighScore", 0).ToString();
         string name = PlayerPrefs.GetString("PlayerName", "Anonymous").ToString();
+        float audioVal = PlayerPrefs.GetFloat("AudioValue", 0.5f);
+        if (source != null)
+        {
+            source.volume = audioVal;
+        }
         high.text = "High Score: " + asd;
         playerName.text = "Name: " + name;
     }

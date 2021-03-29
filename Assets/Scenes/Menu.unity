@@ -2035,9 +2035,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44ebd623942a254390debba8007eb5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Instructions: {fileID: 0}
   highScoreText: {fileID: 2105992546}
   playerName: {fileID: 271825657}
+  source: {fileID: 2017484944}
 --- !u!1 &2017484940
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,7 +2134,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8228ac3683e013d49b15e64994176e50, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0

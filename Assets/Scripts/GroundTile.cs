@@ -29,7 +29,7 @@ public class GroundTile : MonoBehaviour
     }
 
     public GameObject obstaclePrefab;
-    public int obstaclesToSpawn = 3;
+    public int obstaclesToSpawn = 4;
 
     public void SpawnObstacle (int tileSpawnIndex)
     {
@@ -63,14 +63,26 @@ public class GroundTile : MonoBehaviour
         }
 
         int obstacleLimit = Random.Range(1, this.obstaclesToSpawn);
-        if (obstacleLimit > 1 && GameManager.inst.score > 200)
+        Vector3 secondPosition;
+        if (obstacleLimit > 1 && GameManager.inst.score > 100)
         {
             int secondObstacleSpawnIndex = Random.Range(lowerBound, upperBound);
             Transform secondSpawnPoint = transform.GetChild(secondObstacleSpawnIndex).transform;
-            Vector3 secondPosition = new Vector3(secondSpawnPoint.position.x, 0.6f, secondSpawnPoint.position.z);
+            secondPosition = new Vector3(secondSpawnPoint.position.x, 0.6f, secondSpawnPoint.position.z);
             if (position == secondPosition) return;
             // can make the obstacle random too
             Instantiate(batPrefab, secondPosition, obstacleToSpawn.transform.rotation, transform);
+
+            Vector3 thirdPosition;
+            if (obstacleLimit > 2)
+            {
+                int thirdObstacleSpawnIndex = Random.Range(lowerBound, upperBound);
+                Transform thirdSpawnPoint = transform.GetChild(thirdObstacleSpawnIndex).transform;
+                thirdPosition = new Vector3(thirdSpawnPoint.position.x, 0.6f, thirdSpawnPoint.position.z);
+                if (position == thirdPosition || secondPosition == thirdPosition) return;
+                // can make the obstacle random too
+                Instantiate(batPrefab, thirdPosition, obstacleToSpawn.transform.rotation, transform);
+            }
         }
     }
 
