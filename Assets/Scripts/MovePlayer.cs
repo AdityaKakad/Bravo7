@@ -64,13 +64,14 @@ public class MovePlayer : MonoBehaviour
         PlayerPrefs.SetInt("CurrentMaskCount", GameManager.inst.maskCount);
         PlayerPrefs.SetInt("CurrentSyringeCount", GameManager.inst.syringeCount);
 
+        int score = GameManager.inst.score + 2 * GameManager.inst.maskCount + 2 * GameManager.inst.syringeCount;
         DateTime endTime = DateTime.Now;
         int seconds = (int)System.Math.Abs((GameManager.inst.gameStartTime - endTime).TotalSeconds);
         Analytics.CustomEvent("Game Statistics", new Dictionary<string, object>
           {
             { "coins", GameManager.inst.coinsCollectedPerGame},
             { "sessionLength", seconds },
-            { "total points", GameManager.inst.score},
+            { "total points", score},
             { "doctor time", GameManager.inst.docTimeSeconds },
             { "human time", seconds - GameManager.inst.docTimeSeconds },
             { "doctor points", GameManager.inst.cumulativeDocPoints },
