@@ -8,6 +8,7 @@ public class Menu : MonoBehaviour
 {
     public Text highScoreText;
     public Text playerName;
+    public Text totalCoins;
     public AudioSource source;
 
     public void PlayGame()
@@ -27,6 +28,12 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Leaderboard");
     }
 
+    public void ShowStore()
+    {
+        //Instructions.gameObject.SetActive(true);
+        SceneManager.LoadScene("Store");
+    }
+
     public void ShowSettings()
     {
         //Instructions.gameObject.SetActive(true);
@@ -44,6 +51,7 @@ public class Menu : MonoBehaviour
         Text high = GameObject.Find("HighScoreCard").GetComponent<Text>();
         string asd = PlayerPrefs.GetInt("HighScore", 0).ToString();
         string name = PlayerPrefs.GetString("PlayerName", "Anonymous").ToString();
+        int coins = PlayerPrefs.GetInt("TotalCoins", 0);
         float audioVal = PlayerPrefs.GetFloat("AudioValue", 0.5f);
         if (source != null)
         {
@@ -51,6 +59,7 @@ public class Menu : MonoBehaviour
         }
         high.text = "High Score: " + asd;
         playerName.text = "Name: " + name;
+        totalCoins.text = "Total Coins: " + coins.ToString();
     }
 
     public void QuitGame()
