@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject heart1;
     public GameObject heart2;
     public GameObject heart3;
+    public GameObject heart4;
     public int coinsCollectedPerGame = 0;
     public DateTime gameStartTime;
     public bool isDoctor = false;
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour
     public Text maskText;
     public Text syringeText;
     public Text roleText;
-    public Text livesText;
+    //public Text livesText;
     public Text guiText;
     public Text flashText;
     public MovePlayer playerMovement;
@@ -114,7 +115,11 @@ public class GameManager : MonoBehaviour
         //flashText.text = "SUPERMAN DRIVE ACTIVE!";
         //flashText.gameObject.SetActive(false);
         GameManager.inst.supermanCount++;
-        superManEffectStamp = DateTime.Now.AddSeconds(7);
+        bool isApplied = bool.Parse(PlayerPrefs.GetString("SupermanDrive" + "Applied", "False"));
+        if(!isApplied) 
+            superManEffectStamp = DateTime.Now.AddSeconds(7);
+        else
+            superManEffectStamp = DateTime.Now.AddSeconds(20);
     }
 
     public DateTime GetSuperManStamp()
@@ -218,8 +223,14 @@ public class GameManager : MonoBehaviour
     public void IncrementLives()
     {
         emptyMessage();
-        if (livesLeft<3) {
-            if (livesLeft == 2) {
+        bool isApplied = bool.Parse(PlayerPrefs.GetString("ExtraLife" + "Applied", "False"));
+        int limit = isApplied ? 4 : 3;
+        if (livesLeft<limit) {
+            if (livesLeft == 3)
+            {
+                heart4.GetComponent<Image>().color = Color.red;
+            }
+            else if (livesLeft == 2) {
                 heart1.GetComponent<Image>().color = Color.red;
             }
             else if (livesLeft == 1) {
@@ -227,7 +238,7 @@ public class GameManager : MonoBehaviour
             }
             livesLeft++;
         }
-        livesText.text = "Lives left: " + livesLeft;
+        //livesText.text = "Lives left: " + livesLeft;
     }
 
     public void emptyMessage()
@@ -244,7 +255,11 @@ public class GameManager : MonoBehaviour
               });
 
         if (livesLeft > 1) {
-            if (livesLeft == 3) {
+            if(livesLeft == 4)
+            {
+                heart4.GetComponent<Image>().color = Color.grey;
+            }
+            else if (livesLeft == 3) {
                 heart1.GetComponent<Image>().color = Color.grey;
             }
             else if (livesLeft == 2) {
@@ -256,7 +271,7 @@ public class GameManager : MonoBehaviour
             return false;
         
         GameManager.inst.pointsPerLife = 0;
-        livesText.text = "Lives left: " + livesLeft;
+        //livesText.text = "Lives left: " + livesLeft;
         return true;
     }
 

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class EndGame : MonoBehaviour
 {
     public AudioSource source;
+    public string[] keys = { };
     public void GoToMenu()
     {
         SceneManager.LoadScene("Menu");
@@ -24,5 +25,10 @@ public class EndGame : MonoBehaviour
         {
             source.volume = audioVal;
         }
+
+        foreach(string key in keys){
+            PlayerPrefs.SetString(key + "Applied", "False");
+        }
+
     }
 }

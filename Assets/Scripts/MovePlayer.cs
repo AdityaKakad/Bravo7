@@ -13,13 +13,16 @@ public class MovePlayer : MonoBehaviour
     public Rigidbody rb;
     public SkinnedMeshRenderer renderer;
     int JumpCount = 0;
+    bool dblJumpApplied = false;
     public int MaxJumps = 1; //Maximum amount of jumps (i.e. 2 for double jumps)
 
     float horizontalInput;
+    float verticalInput;
     public float horizontalMultiplier = 30;
     public float jumpForce = 7f;
     public float speedIncreasePer100Points = 0.5f; //initially set to 1f
     public LayerMask groundMask;
+    public GameObject extraHeart;
 
     private void Start()
     {
@@ -31,6 +34,18 @@ public class MovePlayer : MonoBehaviour
         GameManager.inst.supermanCount = 0;
         renderer = this.GetComponentInChildren<SkinnedMeshRenderer>();
         JumpCount = MaxJumps;
+        bool isApplied = bool.Parse(PlayerPrefs.GetString("ExtraLife" + "Applied", "False"));
+        dblJumpApplied = bool.Parse(PlayerPrefs.GetString("DoubleJump" + "Applied", "False"));
+        if (isApplied)
+        {
+            extraHeart.SetActive(true);
+            GameManager.inst.livesLeft = 4;
+        }
+        else
+        {
+            extraHeart.SetActive(false);
+            GameManager.inst.livesLeft = 3;
+        }
     }
 
     private void FixedUpdate()
@@ -45,13 +60,22 @@ public class MovePlayer : MonoBehaviour
     private void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space))
+        verticalInput = Input.GetAxis("Vertical");
+        if (verticalInput > 0)
         {
             if (JumpCount > 0)
             {
                 Jump();
             }
         }
+        else if (dblJumpApplied && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (JumpCount > 0)
+            {
+                DoubleJump();
+            }
+        }
+
 
         if (transform.position.y < -5) { Die(); }
     }
@@ -92,6 +116,12 @@ public class MovePlayer : MonoBehaviour
     private void Jump()
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Acceleration);
+        JumpCount -= 1;
+    }
+
+    private void DoubleJump()
+    {
+        rb.AddForce(Vector3.up * 2 * jumpForce, ForceMode.Acceleration);
         JumpCount -= 1;
     }
 

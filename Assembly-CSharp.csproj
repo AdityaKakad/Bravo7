@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\People.cs" />
     <Compile Include="Assets\Scripts\SettingsMenu.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\StoreItem.cs" />
     <Compile Include="Assets\Scripts\StoreMenu.cs" />
     <Compile Include="Assets\Scripts\Syringe.cs" />
     <Compile Include="Assets\Scripts\Virus.cs" />

@@ -7,6 +7,7 @@ public class MysteryBox : MonoBehaviour
     public float turnSpeed = 90f;
     public static string[] powerUp = { "+5 masks", "+5 syringes", "+30 points", "Role switch!", "Oh no! -20 points!", 
         "Superman Drive", "Vaccinated! +1 life!", "Oh no! -5 masks!", "Oh no! -5 syringes!"};
+    public string[] paidItems = { };
 
     private void OnTriggerEnter(Collider other)
     {

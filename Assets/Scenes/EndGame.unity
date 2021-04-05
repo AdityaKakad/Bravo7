@@ -1388,6 +1388,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 510804731}
+  keys:
+  - SupermanDrive
+  - ExtraLife
+  - DoubleJump
 --- !u!1 &2069836941
 GameObject:
   m_ObjectHideFlags: 0
