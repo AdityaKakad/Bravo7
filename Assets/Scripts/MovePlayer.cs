@@ -18,7 +18,7 @@ public class MovePlayer : MonoBehaviour
 
     float horizontalInput;
     float verticalInput;
-    public float horizontalMultiplier = 30;
+    public float horizontalMultiplier = 1.7f;
     public float jumpForce = 7f;
     public float speedIncreasePer100Points = 0.5f; //initially set to 1f
     public LayerMask groundMask;
@@ -32,6 +32,7 @@ public class MovePlayer : MonoBehaviour
         GameManager.inst.cumulativeDocPoints = 0;
         GameManager.inst.cumulativeSupermanPoints = 0;
         GameManager.inst.supermanCount = 0;
+        horizontalMultiplier = PlayerPrefs.GetFloat("SensitivityValue", 1.7f);
         renderer = this.GetComponentInChildren<SkinnedMeshRenderer>();
         JumpCount = MaxJumps;
         bool isApplied = bool.Parse(PlayerPrefs.GetString("ExtraLife" + "Applied", "False"));
