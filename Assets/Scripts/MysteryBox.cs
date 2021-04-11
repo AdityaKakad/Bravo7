@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MysteryBox : MonoBehaviour
 {
@@ -22,6 +24,7 @@ public class MysteryBox : MonoBehaviour
         // check the object we collide with is the player
         if (other.gameObject.name != "Player") return;
 
+        GameManager.inst.SetMysteryBoxStamp();
         float random = Random.Range(0f, 9f);
         int idx = (int) Mathf.Floor(random);
 

@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     public int cumulativeSupermanPoints = 0;
     public int supermanCount = 0;
     public int pointsPerLife = 0;
+    public DateTime mysteryBoxStamp = DateTime.Now;
 
     public void IncrementScore()
     {
@@ -125,6 +126,16 @@ public class GameManager : MonoBehaviour
     public DateTime GetSuperManStamp()
     {
         return superManEffectStamp;
+    }
+
+    public void SetMysteryBoxStamp()
+    {
+        mysteryBoxStamp = DateTime.Now;
+    }
+
+    public DateTime GetMysteryBoxStamp()
+    {
+        return mysteryBoxStamp;
     }
 
     public void IncrementMask()

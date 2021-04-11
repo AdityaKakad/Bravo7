@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GroundTile : MonoBehaviour
 {
@@ -91,8 +93,9 @@ public class GroundTile : MonoBehaviour
     public GameObject coinPrefab;
     public GameObject mysteryPrefab;
     public float syringeChance = 0.35f;
-    public float maskChance = 0.2f;
+    public float maskChance = 0.20f;
     public float mysteryChance = 0.05f;
+    public float deltaChance = 0.02f;
     public GameObject rightExtent;
     public GameObject leftExtent;
     public GameObject aheadExtent;
@@ -105,15 +108,21 @@ public class GroundTile : MonoBehaviour
         //choose which obstacle to spawn
         GameObject powerupsToSpawn = coinPrefab;
         float random = Random.Range(0f, 1f);
-        if (random < mysteryChance)
+        double timeDiff = (DateTime.Now - GameManager.inst.GetMysteryBoxStamp()).TotalSeconds;
+        // Increase mystery box probability if not collected since 15 seconds
+        float deltaFactor = deltaChance * ((int)timeDiff / 15);
+        deltaFactor = Math.Min(deltaFactor, 0.2f);
+        //print(deltaFactor);
+
+        if (random < mysteryChance + deltaFactor)
         {
             powerupsToSpawn = mysteryPrefab;
         }
-        else if (random < maskChance)
+        else if (random < maskChance + deltaFactor)
         {
             powerupsToSpawn = maskPrefab;
         }
-        else if (random < syringeChance) 
+        else if (random < syringeChance + deltaFactor) 
         {
             powerupsToSpawn = syringePrefab;
         }
