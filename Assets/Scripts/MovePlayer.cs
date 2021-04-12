@@ -17,13 +17,15 @@ public class MovePlayer : MonoBehaviour
     public int MaxJumps = 1; //Maximum amount of jumps (i.e. 2 for double jumps)
 
     float horizontalInput;
-    float verticalInput;
+    public bool verticalInput = false ;
+    public bool doubleJumpInput = false;
     public float horizontalMultiplier = 30;
     public float jumpForce = 7f;
     public float speedIncreasePer100Points = 0.5f; //initially set to 1f
     public LayerMask groundMask;
     public GameObject extraHeart;
 
+    public Joystick joystick;
     private void Start()
     {
         GameManager.inst.gameStartTime = DateTime.Now;
@@ -55,20 +57,37 @@ public class MovePlayer : MonoBehaviour
         Vector3 horizontalMove = transform.right * horizontalInput * speed * Time.fixedDeltaTime * horizontalMultiplier;
         rb.MovePosition(rb.position + forwardMove + horizontalMove);
     }
+    public void jump_update()
+    {
+        verticalInput = true;
+        Update();
+    }
+
+    public void double_jump_update()
+    {
+        
+        doubleJumpInput = true;
+        Update();
+    }
+
 
     // Update is called once per frame
-    private void Update()
+    public void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-        if (verticalInput > 0)
+        horizontalInput = joystick.Horizontal;
+        Debug.Log("VerticalInput");
+        Debug.Log(verticalInput);
+        /*verticalInput = Input.GetAxis("Vertical");*/
+        if (verticalInput)
         {
             if (JumpCount > 0)
             {
+                Debug.Log("Jumpppp");
                 Jump();
             }
         }
-        else if (dblJumpApplied && Input.GetKeyDown(KeyCode.Space))
+        /*else if (dblJumpApplied && Input.GetKeyDown(KeyCode.Space))*/
+        else if (dblJumpApplied && doubleJumpInput)
         {
             if (JumpCount > 0)
             {
