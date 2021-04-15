@@ -275,6 +275,7 @@ MonoBehaviour:
   syringeChance: 0.5
   maskChance: 0.3
   mysteryChance: 0.1
+  deltaChance: 0.02
   rightExtent: {fileID: 1568958530235850399}
   leftExtent: {fileID: 9030383750145016}
   aheadExtent: {fileID: 735683163235254324}
@@ -492,7 +493,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2f3dcf4ea7804f6438e47a40830699db, type: 2}
+  - {fileID: 2100000, guid: c932e35ca4a004b47bd98b42c4faf3f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
