@@ -89,6 +89,8 @@ public class MovePlayer : MonoBehaviour
         PlayerPrefs.SetInt("CurrentMaskCount", GameManager.inst.maskCount);
         PlayerPrefs.SetInt("CurrentSyringeCount", GameManager.inst.syringeCount);
         PlayerPrefs.SetInt("CurrentCoins", GameManager.inst.coinsCollectedPerGame);
+        PlayerPrefs.SetInt("PeopleSaved", GameManager.inst.peopleSaved);
+        PlayerPrefs.SetInt("VirusKilled", GameManager.inst.virusKilled);
 
         int score = GameManager.inst.score + 2 * GameManager.inst.maskCount + 2 * GameManager.inst.syringeCount;
         DateTime endTime = DateTime.Now;

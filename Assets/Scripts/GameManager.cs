@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     public int supermanCount = 0;
     public int pointsPerLife = 0;
     public DateTime mysteryBoxStamp = DateTime.Now;
+    public int virusKilled = 0;
+    public int peopleSaved = 0;
 
     public void IncrementScore()
     {

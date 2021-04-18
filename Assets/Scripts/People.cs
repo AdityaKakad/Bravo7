@@ -39,6 +39,7 @@ public class People : MonoBehaviour
                     else
                     {
                         GameManager.inst.IncrementScore(GameManager.inst.DOCTOR_POWER_POINT);
+                        GameManager.inst.peopleSaved++;
                     }
                 }
 
@@ -48,6 +49,7 @@ public class People : MonoBehaviour
             if (GameManager.inst.isDoctor)
             {
                 GameManager.inst.IncrementScore(GameManager.inst.DOCTOR_POWER_POINT);
+                GameManager.inst.peopleSaved++;
             }
         }
 

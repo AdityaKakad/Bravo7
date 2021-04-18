@@ -36,6 +36,7 @@ public class Virus : MonoBehaviour
                 else
                 {
                     GameManager.inst.IncrementScore(GameManager.inst.DOCTOR_POWER_POINT);
+                    GameManager.inst.virusKilled++;
                 }
             }
         } else
@@ -43,6 +44,7 @@ public class Virus : MonoBehaviour
             if (GameManager.inst.isDoctor)
             {
                 GameManager.inst.IncrementScore(GameManager.inst.DOCTOR_POWER_POINT);
+                GameManager.inst.virusKilled++;
             }
         }
         Destroy(gameObject);

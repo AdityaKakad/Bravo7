@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,8 @@ public class Menu : MonoBehaviour
     public Text playerName;
     public Text totalCoins;
     public AudioSource source;
+    public Canvas dailyTasks;
+    public Canvas mainMenu;
 
     public void PlayGame()
     {
@@ -60,10 +63,41 @@ public class Menu : MonoBehaviour
         high.text = "High Score: " + asd;
         playerName.text = "Name: " + name;
         totalCoins.text = "Total Coins: " + coins.ToString();
+
+        //string lastLogin = PlayerPrefs.GetString("LastLogin", DateTime.Today.ToString("dd-MM-yyyy"));
+        // daily login reward logic
+        // update consecutive days counter
+
+    }
+
+    private void Update()
+    {
+        int coins = PlayerPrefs.GetInt("TotalCoins", 0);
+        totalCoins.text = "Total Coins: " + coins.ToString();
+    }
+
+    private void Start()
+    {
+        mainMenu.gameObject.SetActive(true);
+        dailyTasks.gameObject.SetActive(false);
+        string lastLogin = PlayerPrefs.GetString("LastLogin", DateTime.Today.ToString("dd-MM-yyyy"));
+        string now = DateTime.Today.ToString("dd-MM-yyyy");
+        if (!lastLogin.Equals(now))
+        {
+            PlayerPrefs.SetInt("TotalVirusKilled", 0);
+            PlayerPrefs.SetInt("TotalPeopleSaved", 0);
+            PlayerPrefs.SetInt("TotalGames", 0);
+        }
+        PlayerPrefs.SetString("LastLogin", DateTime.Today.ToString("dd-MM-yyyy"));
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+    public void ShowDailyTasks()
+    {
+        dailyTasks.gameObject.SetActive(true);
+        mainMenu.gameObject.SetActive(false);
     }
 }
