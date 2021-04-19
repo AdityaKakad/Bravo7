@@ -1610,7 +1610,7 @@ MonoBehaviour:
   m_text: 'Coins         help you buy powers from store
 
 
-    Maks         helps
+    Masks         helps
     cure people in doctor mode
 
 
@@ -1618,6 +1618,7 @@ MonoBehaviour:
     mode
 
 
+    Masks and syringes cannot be collected in doctor mode!
 
 '
   m_isRightToLeft: 0
@@ -2702,11 +2703,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score more points to unlock cool powers in store
+  m_text: 'Score more points to unlock cool powers in store!
 
 
-    Use collected coins
-    to buy powers from store
+    Use collected
+    coins to buy powers from store!
+
+
+    Play daily to collect rewards and complete
+    tasks!
 
 
     Flex your high score on LeaderBoard and get rewarded!
@@ -2846,18 +2851,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Role Switch- Change from Human mode to doctor mode(or vice versa)
+  m_text: 'Role Switch - Change from Human mode to doctor mode(or vice versa)
 
 
     Superman
     Drive-FREE Timed Run! Be invincible
 
 
-    Vaccine- Get an extra life upto 3
+    Vaccine - Get an extra life upto 3
 
 
     Collectible
-    flux- Increases/ decreases your coin, masks and syringes
+    flux - Increases/ decreases your coin, masks and syringes
 
 
 
