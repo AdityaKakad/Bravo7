@@ -60,6 +60,18 @@ public class MysteryBox : MonoBehaviour
             }
         }
 
+        else if (GameManager.inst.isDoctor) { 
+            //increase +5 masks/syringe prob & reduce role change prob when in doc mode.
+            if (idx != 0 && idx != 1) {
+                if (random-idx >= 0.9 || (idx == 3 && random-idx >=0.75 && random-idx < 0.8)) {
+                    idx = 1;
+                }
+                else if (random-idx >= 0.8 || (idx == 3 && random-idx >=0.7)) {
+                    idx = 0;
+                }
+            }
+        }
+
         string power = powerUp[idx];
 
         MysteryBoxLogic(idx);

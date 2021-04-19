@@ -641,7 +641,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88d049774b0fa1646885de849f19d75c, type: 2}
+  - {fileID: 2100000, guid: caf27bac343dd294da2591cc431e171f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1962,6 +1962,8 @@ MonoBehaviour:
   cumulativeSupermanPoints: 0
   supermanCount: 0
   pointsPerLife: 0
+  virusKilled: 0
+  peopleSaved: 0
 --- !u!4 &2121509186
 Transform:
   m_ObjectHideFlags: 0
