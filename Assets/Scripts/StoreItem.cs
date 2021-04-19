@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
+
 
 public class StoreItem : MonoBehaviour
 {
@@ -71,6 +73,8 @@ public class StoreItem : MonoBehaviour
             print("Coins left: " + coins);
             print("Own: " + own);
             ownText.text = "Own: " + own.ToString();
+            AnalyticsResult storeAnlytics = Analytics.CustomEvent("Store item bought");
+            Debug.Log("Store Item bought:" + coins + own);
 
         }
     }

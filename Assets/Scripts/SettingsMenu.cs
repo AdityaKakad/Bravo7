@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
+
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("SensitivityValue", sensitivitySlider.value);
         //Instructions.gameObject.SetActive(true);
         SceneManager.LoadScene("Menu");
+        AnalyticsResult analyticsResult = Analytics.CustomEvent("Audio Slider");
+        Debug.Log("Slider changed: " + audioSlider.value);
     }
 
     private void Awake()
