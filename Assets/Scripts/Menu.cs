@@ -10,9 +10,11 @@ public class Menu : MonoBehaviour
     public Text highScoreText;
     public Text playerName;
     public Text totalCoins;
+    public Text dailyLogin;
     public AudioSource source;
     public Canvas dailyTasks;
     public Canvas mainMenu;
+    public DateTime loginBonusFlashStamp;
 
     public void PlayGame()
     {
@@ -64,6 +66,43 @@ public class Menu : MonoBehaviour
         playerName.text = "Name: " + name;
         totalCoins.text = "Total Coins: " + coins.ToString();
 
+        //daily and weekly login bonuses
+        long lastLoginStamp = Convert.ToInt64(PlayerPrefs.GetString("dailyBonusTimestamp", "-1"));
+        int dayCount = PlayerPrefs.GetInt("dailyLoginCount", 0);
+        if (lastLoginStamp == -1) {
+            coins++;
+            PlayerPrefs.SetInt("TotalCoins", coins);
+            dailyLogin.text = "Login Bonus: +1";
+            loginBonusFlashStamp = DateTime.Now.AddSeconds(5);
+            dayCount++;
+            PlayerPrefs.SetInt("dailyLoginCount", dayCount);
+        }
+        else {
+            DateTime oldDate = DateTime.FromBinary(lastLoginStamp);
+            DateTime currentDate = System.DateTime.Now;
+            TimeSpan difference = currentDate.Subtract(oldDate);
+            if (difference.Hours > 24) {
+                if (difference.Hours <= 48) {
+                    dayCount++;
+                }
+                else {
+                    dayCount = 0;
+                }
+                if (dayCount == 7) {
+                    coins += 10;
+                    dayCount = 0;
+                    dailyLogin.text = "Weekly Login Bonus: +10";
+                }
+                else {
+                    coins++;
+                    dailyLogin.text = "Daily Login Bonus: +1";
+                }
+                PlayerPrefs.SetInt("dailyLoginCount", dayCount);
+                PlayerPrefs.SetInt("TotalCoins", coins);
+                loginBonusFlashStamp = DateTime.Now.AddSeconds(5);
+            }
+        }
+        PlayerPrefs.SetString("dailyBonusTimestamp", System.DateTime.Now.ToBinary().ToString());
         //string lastLogin = PlayerPrefs.GetString("LastLogin", DateTime.Today.ToString("dd-MM-yyyy"));
         // daily login reward logic
         // update consecutive days counter
@@ -74,6 +113,9 @@ public class Menu : MonoBehaviour
     {
         int coins = PlayerPrefs.GetInt("TotalCoins", 0);
         totalCoins.text = "Total Coins: " + coins.ToString();
+        if (loginBonusFlashStamp < DateTime.Now) {
+            dailyLogin.text = "";
+        }
     }
 
     private void Start()
