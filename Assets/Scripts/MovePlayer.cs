@@ -66,14 +66,18 @@ public class MovePlayer : MonoBehaviour
         {
             if (JumpCount > 0)
             {
-                Jump();
+                if (GameManager.inst.GetNoJumpStamp() < DateTime.Now) {
+                    Jump();
+                }
             }
         }
         else if (dblJumpApplied && Input.GetKeyDown(KeyCode.Space))
         {
             if (JumpCount > 0)
             {
-                DoubleJump();
+                if (GameManager.inst.GetNoJumpStamp() < DateTime.Now) {
+                    DoubleJump();
+                }
             }
         }
 

@@ -8,7 +8,7 @@ public class MysteryBox : MonoBehaviour
 {
     public float turnSpeed = 90f;
     public static string[] powerUp = { "+5 masks", "+5 syringes", "+30 points", "Role switch!", "Oh no! -20 points!", 
-        "Superman Drive", "Vaccinated! +1 life!", "Oh no! -5 masks!", "Oh no! -5 syringes!"};
+        "Superman Drive", "Vaccinated! +1 life!", "Oh no! -5 masks!", "Oh no! -5 syringes!", "No Jump!"};
     public string[] paidItems = { };
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +25,7 @@ public class MysteryBox : MonoBehaviour
         if (other.gameObject.name != "Player") return;
 
         GameManager.inst.SetMysteryBoxStamp();
-        float random = Random.Range(0f, 9f);
+        float random = Random.Range(0f, 10f);
         int idx = (int) Mathf.Floor(random);
 
         //alter mystery box probability based on in-game situation
@@ -120,6 +120,9 @@ public class MysteryBox : MonoBehaviour
                 break;
             case 8:
                 GameManager.inst.DecrementSyringe(5);
+                break;
+            case 9:
+                GameManager.inst.SetNoJumpStamp();
                 break;
         }
     }

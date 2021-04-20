@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public Text flashText;
     public MovePlayer playerMovement;
     public DateTime superManEffectStamp = DateTime.MinValue;
+    public DateTime noJumpEffectStamp = DateTime.MinValue;
     public int DOCTOR_POWER_POINT = 10;
     public int doctorModePoints = 0;
     public bool gameStart = true;
@@ -123,11 +124,23 @@ public class GameManager : MonoBehaviour
             superManEffectStamp = DateTime.Now.AddSeconds(7);
         else
             superManEffectStamp = DateTime.Now.AddSeconds(20);
+        noJumpEffectStamp = DateTime.MinValue;
+    }
+
+    public void SetNoJumpStamp()
+    {
+        noJumpEffectStamp = DateTime.Now.AddSeconds(7);
+        superManEffectStamp = DateTime.MinValue;
     }
 
     public DateTime GetSuperManStamp()
     {
         return superManEffectStamp;
+    }
+
+    public DateTime GetNoJumpStamp()
+    {
+        return noJumpEffectStamp;
     }
 
     public void SetMysteryBoxStamp()
@@ -361,6 +374,9 @@ public class GameManager : MonoBehaviour
         }
         if (GetSuperManStamp() >= DateTime.Now) {
             flashText.text += "SUPERMAN DRIVE ACTIVE!" + " " + (GetSuperManStamp() - DateTime.Now).TotalSeconds;
+        }
+        else if (GetNoJumpStamp() >= DateTime.Now) {
+            flashText.text += "NO JUMP!" + " " + (GetNoJumpStamp() - DateTime.Now).TotalSeconds;
         }
     }
 }
