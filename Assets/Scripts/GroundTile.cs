@@ -8,8 +8,10 @@ public class GroundTile : MonoBehaviour
     public int powerupsToSpawn = 6;
     public GameObject batPrefab;
     public GameObject peoplePrefab;
+    public GameObject archPrefab;
     public float batChance = 0.2f;
     public float peopleChance = 0.4f;
+    public float archChance = 0.6f;
 
     GroundSpawner groundSpawner;
     // Start is called before the first frame update
@@ -31,7 +33,7 @@ public class GroundTile : MonoBehaviour
     }
 
     public GameObject obstaclePrefab;
-    public int obstaclesToSpawn = 4;
+    public int obstaclesToSpawn = 3;
 
     public void SpawnObstacle (int tileSpawnIndex)
     {
@@ -44,6 +46,9 @@ public class GroundTile : MonoBehaviour
         }
         else if (random < peopleChance) {
             obstacleToSpawn = peoplePrefab;
+        }
+        else if (random < archChance) {
+            obstacleToSpawn = archPrefab;
         }
 
         int lowerBound = tileSpawnIndex*3 + 1;

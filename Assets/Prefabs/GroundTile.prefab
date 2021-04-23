@@ -259,8 +259,11 @@ MonoBehaviour:
   batPrefab: {fileID: 1625221395402176, guid: c9951ca0f61167b4593ffe21b0a089c8, type: 3}
   peoplePrefab: {fileID: 1000014232435074, guid: 0a36d45e1b007e14b884de828f3b6938,
     type: 3}
+  archPrefab: {fileID: 4463566038210007903, guid: 49a5f24a081cbbc44bd23d76c2869723,
+    type: 3}
   batChance: 0.2
   peopleChance: 0.4
+  archChance: 0.6
   obstaclePrefab: {fileID: 1067925524328404, guid: 6bbfea6690ef7724ba495c866081f855,
     type: 3}
   obstaclesToSpawn: 3
@@ -493,7 +496,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c932e35ca4a004b47bd98b42c4faf3f4, type: 2}
+  - {fileID: 2100000, guid: 9efaa5cc6123343228ec715228e3d1c0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

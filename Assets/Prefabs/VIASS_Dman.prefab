@@ -911,8 +911,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 5.8785396, z: 0}
+  m_Center: {x: 0, y: 2.964483, z: 1.4085388}
 --- !u!114 &5814186424768809127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -936,6 +936,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  extraHeart: {fileID: 0}
 --- !u!1 &5816023389220981439
 GameObject:
   m_ObjectHideFlags: 0
