@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public MovePlayer playerMovement;
     public DateTime superManEffectStamp = DateTime.MinValue;
     public DateTime noJumpEffectStamp = DateTime.MinValue;
+    public DateTime coinMultiplierStamp = DateTime.MinValue;
     public int DOCTOR_POWER_POINT = 10;
     public int doctorModePoints = 0;
     public bool gameStart = true;
@@ -124,13 +125,23 @@ public class GameManager : MonoBehaviour
             superManEffectStamp = DateTime.Now.AddSeconds(7);
         else
             superManEffectStamp = DateTime.Now.AddSeconds(20);
+
         noJumpEffectStamp = DateTime.MinValue;
+        coinMultiplierStamp = DateTime.MinValue;
     }
 
     public void SetNoJumpStamp()
     {
         noJumpEffectStamp = DateTime.Now.AddSeconds(7);
         superManEffectStamp = DateTime.MinValue;
+        coinMultiplierStamp = DateTime.MinValue;
+    }
+
+    public void SetCoinMultiplierStamp()
+    {
+        coinMultiplierStamp = DateTime.Now.AddSeconds(7);
+        superManEffectStamp = DateTime.MinValue;
+        noJumpEffectStamp = DateTime.MinValue;
     }
 
     public DateTime GetSuperManStamp()
@@ -141,6 +152,11 @@ public class GameManager : MonoBehaviour
     public DateTime GetNoJumpStamp()
     {
         return noJumpEffectStamp;
+    }
+
+    public DateTime GetCoinMultiplierStamp()
+    {
+        return coinMultiplierStamp;
     }
 
     public void SetMysteryBoxStamp()
@@ -374,10 +390,14 @@ public class GameManager : MonoBehaviour
         //}
         flashText.text = "";
         if (GetSuperManStamp() >= DateTime.Now) {
-            flashText.text = "SUPERMAN DRIVE ACTIVE!" + " " + (GetSuperManStamp() - DateTime.Now).TotalSeconds;
+            flashText.text = "SUPERMAN DRIVE ACTIVE!" + " \n" + (GetSuperManStamp() - DateTime.Now).TotalSeconds;
         }
         else if (GetNoJumpStamp() >= DateTime.Now) {
-            flashText.text = "NO JUMP!" + " " + (GetNoJumpStamp() - DateTime.Now).TotalSeconds;
+            flashText.text = "NO JUMP!" + " \n" + (GetNoJumpStamp() - DateTime.Now).TotalSeconds;
+        } 
+        else if (GetCoinMultiplierStamp() >= DateTime.Now)
+        {
+            flashText.text = "5x COINS!" + " \n" + (GetCoinMultiplierStamp() - DateTime.Now).TotalSeconds;
         }
     }
 }

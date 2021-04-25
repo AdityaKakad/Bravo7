@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,8 +20,16 @@ public class Coin : MonoBehaviour
         if (other.gameObject.name != "Player") return;
 
         // Add to the player's score
-        GameManager.inst.IncrementScore();
-        GameManager.inst.coinsCollectedPerGame++;
+        if (GameManager.inst.GetCoinMultiplierStamp() < DateTime.Now)
+        {
+            GameManager.inst.IncrementScore();
+            GameManager.inst.coinsCollectedPerGame++;
+        } 
+        else
+        {
+            GameManager.inst.IncrementScore(5);
+            GameManager.inst.coinsCollectedPerGame+=5;
+        }
 
         // Destroy the mask object
         Destroy(gameObject);

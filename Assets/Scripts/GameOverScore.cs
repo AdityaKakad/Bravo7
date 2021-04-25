@@ -8,6 +8,7 @@ public class GameOverScore : MonoBehaviour
 {
     public Text finalScoreText;
     public Text highScoreText;
+    public Text gameOverText;
 
     private void Awake()
     {
@@ -16,10 +17,20 @@ public class GameOverScore : MonoBehaviour
         finalScoreText.text = "Final Score: " + score + "!";
         int highScore = PlayerPrefs.GetInt("HighScore", 0);
 
+        string gameOver = "You have been infected! Game Over!";
         int coinsCollected = PlayerPrefs.GetInt("CurrentCoins", 0);
         int totalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
+
         totalCoins += coinsCollected;
+
+        if (score - highScore >= 50)
+        {
+            gameOver += "\nYou made progress! +20 coins!";
+            totalCoins += 20;
+        }
+
         PlayerPrefs.SetInt("TotalCoins", totalCoins);
+        gameOverText.text = gameOver;
 
         if(highScore <= score) {
             highScore = score; 

@@ -8,7 +8,7 @@ public class MysteryBox : MonoBehaviour
 {
     public float turnSpeed = 90f;
     public static string[] powerUp = { "+5 masks", "+5 syringes", "+30 points", "Role switch!", "Oh no! -20 points!", 
-        "Superman Drive", "Vaccinated! +1 life!", "Oh no! -5 masks!", "Oh no! -5 syringes!", "No Jump!"};
+        "Superman Drive", "Vaccinated! +1 life!", "Oh no! -5 masks!", "Oh no! -5 syringes!", "No Jump!", "5x Coins!"};
     public string[] paidItems = { };
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +25,14 @@ public class MysteryBox : MonoBehaviour
         if (other.gameObject.name != "Player") return;
 
         GameManager.inst.SetMysteryBoxStamp();
-        float random = Random.Range(0f, 10f);
+        
+        // Logic for store bought power up
+        bool coinMultiplierApplied = bool.Parse(PlayerPrefs.GetString("CoinMultiplier" + "Applied", "False"));
+        float upper = 10f;
+        if (coinMultiplierApplied)
+            upper = 11f;
+
+        float random = Random.Range(0f, upper);
         int idx = (int) Mathf.Floor(random);
 
         //alter mystery box probability based on in-game situation
@@ -59,7 +66,6 @@ public class MysteryBox : MonoBehaviour
                 }
             }
         }
-
         else if (GameManager.inst.isDoctor) { 
             //increase +5 masks/syringe prob & reduce role change prob when in doc mode.
             if (idx != 0 && idx != 1) {
@@ -74,7 +80,7 @@ public class MysteryBox : MonoBehaviour
 
         string power = powerUp[idx];
 
-        MysteryBoxLogic(idx);
+        MysteryBoxLogic(idx, coinMultiplierApplied);
 
         if (other.gameObject.GetComponent<MovePlayer>() != null)
         {
@@ -88,7 +94,7 @@ public class MysteryBox : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void MysteryBoxLogic(int choice)
+    private void MysteryBoxLogic(int choice, bool apply)
     {
         //Mystery logic - Secret Sauce
         switch (choice)
@@ -123,6 +129,10 @@ public class MysteryBox : MonoBehaviour
                 break;
             case 9:
                 GameManager.inst.SetNoJumpStamp();
+                break;
+            case 10:
+                if(apply)
+                    GameManager.inst.SetCoinMultiplierStamp();
                 break;
         }
     }
