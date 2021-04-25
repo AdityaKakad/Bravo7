@@ -307,7 +307,7 @@ public class GameManager : MonoBehaviour
         if (isDoctor)
         {
             role = "DOCTOR";
-            flashText.color = Color.red;
+            //flashText.color = Color.red;
             docStartTime = DateTime.Now;
             Analytics.CustomEvent("Doctor switch", new Dictionary<string, object>
               {
@@ -366,17 +366,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDoctor) {
-            flashText.text = "Role: " + role + "\n";
-        }
-        else {
-            flashText.text = "";
-        }
+        //if (isDoctor) {
+        //    flashText.text = "Role: " + role + "\n";
+        //}
+        //else {
+        //    flashText.text = "";
+        //}
+        flashText.text = "";
         if (GetSuperManStamp() >= DateTime.Now) {
-            flashText.text += "SUPERMAN DRIVE ACTIVE!" + " " + (GetSuperManStamp() - DateTime.Now).TotalSeconds;
+            flashText.text = "SUPERMAN DRIVE ACTIVE!" + " " + (GetSuperManStamp() - DateTime.Now).TotalSeconds;
         }
         else if (GetNoJumpStamp() >= DateTime.Now) {
-            flashText.text += "NO JUMP!" + " " + (GetNoJumpStamp() - DateTime.Now).TotalSeconds;
+            flashText.text = "NO JUMP!" + " " + (GetNoJumpStamp() - DateTime.Now).TotalSeconds;
         }
     }
 }

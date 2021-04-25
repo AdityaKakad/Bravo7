@@ -70,12 +70,11 @@ public class StoreItem : MonoBehaviour
             own++;
             PlayerPrefs.SetInt(key + "Own", own);
             PlayerPrefs.SetInt("TotalCoins", coins);
-            print("Coins left: " + coins);
-            print("Own: " + own);
             ownText.text = "Own: " + own.ToString();
-            AnalyticsResult storeAnlytics = Analytics.CustomEvent("Store item bought");
-            Debug.Log("Store Item bought:" + coins + own);
-
+            Analytics.CustomEvent("Store item bought", new Dictionary<string, object>
+            {
+                { key, 1} 
+            });
         }
     }
 

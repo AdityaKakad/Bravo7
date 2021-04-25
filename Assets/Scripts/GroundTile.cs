@@ -78,7 +78,7 @@ public class GroundTile : MonoBehaviour
             secondPosition = new Vector3(secondSpawnPoint.position.x, 0.6f, secondSpawnPoint.position.z);
             if (position == secondPosition) return;
             // can make the obstacle random too
-            Instantiate(batPrefab, secondPosition, obstacleToSpawn.transform.rotation, transform);
+            Instantiate(peoplePrefab, secondPosition, peoplePrefab.transform.rotation, transform);
 
             Vector3 thirdPosition;
             if (obstacleLimit > 2)
@@ -88,7 +88,7 @@ public class GroundTile : MonoBehaviour
                 thirdPosition = new Vector3(thirdSpawnPoint.position.x, 0.6f, thirdSpawnPoint.position.z);
                 if (position == thirdPosition || secondPosition == thirdPosition) return;
                 // can make the obstacle random too
-                Instantiate(batPrefab, thirdPosition, obstacleToSpawn.transform.rotation, transform);
+                Instantiate(batPrefab, thirdPosition, batPrefab.transform.rotation, transform);
             }
         }
     }

@@ -21,8 +21,15 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("SensitivityValue", sensitivitySlider.value);
         //Instructions.gameObject.SetActive(true);
         SceneManager.LoadScene("Menu");
-        AnalyticsResult analyticsResult = Analytics.CustomEvent("Audio Slider");
-        Debug.Log("Slider changed: " + audioSlider.value);
+        Analytics.CustomEvent("Audio value", new Dictionary<string, object>
+        {
+            { "AudioValue", audioSlider.value }
+        });
+    }
+
+    private void Update()
+    {
+        PlayerPrefs.SetFloat("AudioValue", audioSlider.value);
     }
 
     private void Awake()

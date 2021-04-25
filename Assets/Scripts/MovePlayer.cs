@@ -96,6 +96,11 @@ public class MovePlayer : MonoBehaviour
         PlayerPrefs.SetInt("PeopleSaved", GameManager.inst.peopleSaved);
         PlayerPrefs.SetInt("VirusKilled", GameManager.inst.virusKilled);
 
+        if(GameManager.inst.livesLeft>0)
+            Analytics.CustomEvent("Player fell");
+        else
+            Analytics.CustomEvent("Player lost all lives");
+
         int score = GameManager.inst.score + 2 * GameManager.inst.maskCount + 2 * GameManager.inst.syringeCount;
         DateTime endTime = DateTime.Now;
         int seconds = (int)System.Math.Abs((GameManager.inst.gameStartTime - endTime).TotalSeconds);
