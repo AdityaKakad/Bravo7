@@ -20,15 +20,15 @@ public class SettingsMenu : MonoBehaviour
             if(playerName.text != prevName)
             {
                 int score = 0;
-                Highscore[] scores = Highscores.DownloadHighscoresForUser(playerName.text);
-                if (scores.Length > 0)
-                {
-                    foreach(Highscore hs in scores)
-                    {
-                        score = Mathf.Max(score, hs.score);
-                    }
-                    //Debug.Log("Score fetched: "+score);
-                }
+                //Highscore[] scores = Highscores.DownloadHighscoresForUser(playerName.text);
+                //if (scores.Length > 0)
+                //{
+                //    foreach(Highscore hs in scores)
+                //    {
+                //        score = Mathf.Max(score, hs.score);
+                //    }
+                //    //Debug.Log("Score fetched: "+score);
+                //}
                 PlayerPrefs.SetInt("HighScore", score);
             }
             PlayerPrefs.SetString("PlayerName", playerName.text);

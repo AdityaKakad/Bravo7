@@ -11,7 +11,6 @@ public class Highscores : MonoBehaviour
 	public Highscore[] highscoresList;
 	static Highscores instance;
 	string scene;
-	string user;
 
 	void Awake()
 	{
