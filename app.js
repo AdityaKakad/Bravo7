@@ -48,6 +48,24 @@ server.get('/receive', (request, response) => {
             })  
 });
 
+server.get('/user', (request, response) => {
+    //"http://dreamlo.com/lb/6060fb7f8f421366b0545c75/pipe-get/Aditya"
+    let user = request.query.user;
+    if(user == undefined) 
+        user = "";
+    let webURL = url + publicCode + "/pipe-get/"+user;
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+    response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    api_helper.make_API_call(webURL)
+            .then((res) => {
+                response.send(res);
+            })
+            .catch(error => {
+                response.send(error);
+            })  
+});
+
 //Express error handling middleware
 server.use((request, response) => {
     response.type('text/plain');
