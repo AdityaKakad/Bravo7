@@ -109,7 +109,7 @@ public class Highscores : MonoBehaviour
 		// blocks here until UnityWebRequest() completes
 		while (e.MoveNext()) ;
 
-		//Debug.Log(result.result);
+		Debug.Log(result.result);
 		return result.result;
 	}
 
