@@ -11,6 +11,7 @@ public class SettingsMenu : MonoBehaviour
     public InputField playerName;
     public Slider audioSlider;
     public Slider sensitivitySlider;
+    public ScoreSheet scoreMgr;
 
     public void BackToMain()
     {
@@ -20,15 +21,8 @@ public class SettingsMenu : MonoBehaviour
             if(playerName.text != prevName)
             {
                 int score = 0;
-                //Highscore[] scores = Highscores.DownloadHighscoresForUser(playerName.text);
-                //if (scores.Length > 0)
-                //{
-                //    foreach(Highscore hs in scores)
-                //    {
-                //        score = Mathf.Max(score, hs.score);
-                //    }
-                //    //Debug.Log("Score fetched: "+score);
-                //}
+                if (ScoreSheet.highscores.ContainsKey(playerName.text))
+                    score = ScoreSheet.highscores[playerName.text].score;
                 PlayerPrefs.SetInt("HighScore", score);
             }
             PlayerPrefs.SetString("PlayerName", playerName.text);

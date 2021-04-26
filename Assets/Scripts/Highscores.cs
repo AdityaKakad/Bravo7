@@ -8,7 +8,9 @@ public class Highscores : MonoBehaviour
 	const string serverURL = "https://avian-casing-309102.wl.r.appspot.com/";
 
 	DisplayHighscores highscoreDisplay;
+	ScoreSheet scoreSheet;
 	public Highscore[] highscoresList;
+	public Highscore[] highscores;
 	static Highscores instance;
 	string scene;
 
@@ -16,8 +18,10 @@ public class Highscores : MonoBehaviour
 	{
 		instance = this;
 		instance.scene = SceneManager.GetActiveScene().name;
-		if(instance.scene != "MainGame")
+		if(instance.scene != "MainGame" && instance.scene != "Settings")
 			highscoreDisplay = GetComponent<DisplayHighscores>();
+		if (instance.scene == "Settings")
+			scoreSheet = GetComponent<ScoreSheet>();
 	}
 
 	public static void AddNewHighscore(string username, int score)
@@ -47,6 +51,11 @@ public class Highscores : MonoBehaviour
 		StartCoroutine("DownloadHighscoresFromDatabase");
 	}
 
+	public void DownloadHighscoresForScoreSheet()
+	{
+		StartCoroutine("DownloadHighscoresFromDatabaseServer");
+	}
+
 	IEnumerator DownloadHighscoresFromDatabase()
 	{
 		WWW www = new WWW(serverURL+"receive");
@@ -63,10 +72,20 @@ public class Highscores : MonoBehaviour
 		}
 	}
 
-	public static Highscore[] DownloadHighscoresForUser(string username)
+	IEnumerator DownloadHighscoresFromDatabaseServer()
 	{
-		string result = WebGet(username);
-		return getFormattedHighscores(result);
+		WWW www = new WWW(serverURL + "receive");
+		yield return www;
+
+		if (string.IsNullOrEmpty(www.error))
+		{
+			getFormattedHighscores(www.text);
+			if (scoreSheet != null) scoreSheet.OnHighscoresDownloaded(highscores);
+		}
+		else
+		{
+			print("Error Downloading: " + www.error);
+		}
 	}
 
 	void FormatHighscores(string textStream)
@@ -84,52 +103,19 @@ public class Highscores : MonoBehaviour
 		}
 	}
 
-	public static Highscore[] getFormattedHighscores(string textStream)
+	void getFormattedHighscores(string textStream)
 	{
 		string[] entries = textStream.Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
-		Highscore[] userHighscores = new Highscore[entries.Length];
+		highscores = new Highscore[entries.Length];
 
 		for (int i = 0; i < entries.Length; i++)
 		{
 			string[] entryInfo = entries[i].Split(new char[] { '|' });
 			string username = entryInfo[0];
 			int score = int.Parse(entryInfo[1]);
-			userHighscores[i] = new Highscore(username, score);
+			highscores[i] = new Highscore(username, score);
 			//print(highscoresList[i].username + ": " + highscoresList[i].score);
 		}
-		return userHighscores;
-	}
-
-	static string WebGet(string user)
-	{
-		Response result = new Response();
-		IEnumerator e = GetStuff(result, user);
-
-		// blocks here until UnityWebRequest() completes
-		while (e.MoveNext()) ;
-
-		Debug.Log(result.result);
-		return result.result;
-	}
-
-	public class Response
-	{
-		public string result = "";
-	}
-
-	static IEnumerator GetStuff(Response res, string user)
-	{
-		UnityWebRequest www = UnityWebRequest.Get(serverURL + "user?user=" + user);
-
-		yield return www.SendWebRequest();
-
-		while (!www.isDone)
-			yield return true;
-
-		if (www.isNetworkError || www.isHttpError)
-			res.result = www.error;
-		else
-			res.result = www.downloadHandler.text;
 	}
 
 }

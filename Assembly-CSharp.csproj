@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\MysteryBox.cs" />
     <Compile Include="Assets\Scripts\OverallBackground.cs" />
     <Compile Include="Assets\Scripts\People.cs" />
+    <Compile Include="Assets\Scripts\ScoreSheet.cs" />
     <Compile Include="Assets\Scripts\SettingsMenu.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\StoreItem.cs" />
