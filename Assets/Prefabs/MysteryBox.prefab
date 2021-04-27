@@ -107,11 +107,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 90
-  powerUp:
-  - +5 masks
-  - +5 syringes
-  - +200 points
-  - Role switch!
-  - Oh no! -50 points!
-  - Superman Drive
-  - Vaccinated! +1 life!
+  paidItems: []
+  effectClip: {fileID: 8300000, guid: 58df3de486808344ebac662543cb5f5d, type: 3}

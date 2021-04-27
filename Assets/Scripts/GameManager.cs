@@ -45,6 +45,10 @@ public class GameManager : MonoBehaviour
     public DateTime mysteryBoxStamp = DateTime.Now;
     public int virusKilled = 0;
     public int peopleSaved = 0;
+    public AudioSource audioSrc;
+    public AudioClip lifeLostClip;
+    public AudioClip doctorClip;
+    public AudioClip powerClip;
 
     public void IncrementScore()
     {
@@ -62,7 +66,7 @@ public class GameManager : MonoBehaviour
         emptyMessage();
         score++;
         //TODO: change point divisor to 100
-        if (score <= 500) {
+        if (score <= 300) {
             playerMovement.speed = playerMovement.startSpeed + (score / 100) * playerMovement.speedIncreasePer100Points;
         }
         scoreText.text = "Score: " + score;
@@ -83,8 +87,10 @@ public class GameManager : MonoBehaviour
 
         emptyMessage();
         score+= value;
-        //TODO: change point divisor to 100
-        playerMovement.speed = playerMovement.startSpeed + (score / 100) * playerMovement.speedIncreasePer100Points;
+        if (score <= 300)
+        {
+            playerMovement.speed = playerMovement.startSpeed + (score / 100) * playerMovement.speedIncreasePer100Points;
+        }
         scoreText.text = "Score: " + score;
     }
 
@@ -110,6 +116,10 @@ public class GameManager : MonoBehaviour
             score = 0;
         }
         scoreText.text = "Score: " + score;
+        if (score <= 300)
+        {
+            playerMovement.speed = playerMovement.startSpeed + (score / 100) * playerMovement.speedIncreasePer100Points;
+        }
     }
 
     public void SetSuperManStamp()
@@ -171,6 +181,8 @@ public class GameManager : MonoBehaviour
 
     public void IncrementMask()
     {
+        GameManager.inst.audioSrc.clip = powerClip;
+        GameManager.inst.audioSrc.Play();
         emptyMessage();
         maskCount++;
         
@@ -218,6 +230,8 @@ public class GameManager : MonoBehaviour
 
     public void IncrementSyringe()
     {
+        GameManager.inst.audioSrc.clip = powerClip;
+        GameManager.inst.audioSrc.Play();
         emptyMessage();
         syringeCount++;
 
@@ -290,6 +304,8 @@ public class GameManager : MonoBehaviour
 
     public bool DecrementLives()
     {
+        GameManager.inst.audioSrc.clip = lifeLostClip;
+        audioSrc.Play();
         Analytics.CustomEvent("Life Lost", new Dictionary<string, object>
               {
                 { "Lives remaining", GameManager.inst.livesLeft },
@@ -322,6 +338,8 @@ public class GameManager : MonoBehaviour
         isDoctor = !isDoctor;
         if (isDoctor)
         {
+            GameManager.inst.audioSrc.clip = doctorClip;
+            GameManager.inst.audioSrc.Play();
             role = "DOCTOR";
             //flashText.color = Color.red;
             docStartTime = DateTime.Now;

@@ -6,9 +6,12 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     public float turnSpeed = 90f;
+    AudioSource audioSrc;
+    public AudioClip coinClip;
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.gameObject.GetComponent<Virus>() != null ||
             other.gameObject.GetComponent<Bat>() != null ||
             other.gameObject.GetComponent<People>() != null)
@@ -23,10 +26,14 @@ public class Coin : MonoBehaviour
         if (GameManager.inst.GetCoinMultiplierStamp() < DateTime.Now)
         {
             GameManager.inst.IncrementScore();
+            GameManager.inst.audioSrc.clip = coinClip;
+            GameManager.inst.audioSrc.Play();
             GameManager.inst.coinsCollectedPerGame++;
         } 
         else
         {
+            GameManager.inst.audioSrc.clip = coinClip;
+            GameManager.inst.audioSrc.Play();
             GameManager.inst.IncrementScore(5);
             GameManager.inst.coinsCollectedPerGame+=5;
         }

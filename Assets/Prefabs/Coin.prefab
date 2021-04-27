@@ -125,3 +125,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 90
+  coinClip: {fileID: 8300000, guid: d8357e469af94874a9dd3ef06409a1c9, type: 3}

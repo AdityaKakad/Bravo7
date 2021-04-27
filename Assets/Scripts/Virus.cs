@@ -6,6 +6,7 @@ using UnityEngine;
 public class Virus : MonoBehaviour
 {
     MovePlayer playerMovement;
+    public AudioClip savedClip;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,8 @@ public class Virus : MonoBehaviour
                 else
                 {
                     GameManager.inst.IncrementScore(GameManager.inst.DOCTOR_POWER_POINT);
+                    GameManager.inst.audioSrc.clip = savedClip;
+                    GameManager.inst.audioSrc.Play();
                     GameManager.inst.virusKilled++;
                 }
             }
@@ -44,6 +47,8 @@ public class Virus : MonoBehaviour
             if (GameManager.inst.isDoctor)
             {
                 GameManager.inst.IncrementScore(GameManager.inst.DOCTOR_POWER_POINT);
+                GameManager.inst.audioSrc.clip = savedClip;
+                GameManager.inst.audioSrc.Play();
                 GameManager.inst.virusKilled++;
             }
         }

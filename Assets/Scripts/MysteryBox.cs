@@ -10,6 +10,7 @@ public class MysteryBox : MonoBehaviour
     public static string[] powerUp = { "+5 masks", "+5 syringes", "+30 points", "Role switch!", "Oh no! -20 points!", 
         "Superman Drive", "Vaccinated! +1 life!", "Oh no! -5 masks!", "Oh no! -5 syringes!", "No Jump!", "5x Coins!"};
     public string[] paidItems = { };
+    public AudioClip effectClip;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -25,7 +26,9 @@ public class MysteryBox : MonoBehaviour
         if (other.gameObject.name != "Player") return;
 
         GameManager.inst.SetMysteryBoxStamp();
-        
+        GameManager.inst.audioSrc.clip = effectClip;
+        GameManager.inst.audioSrc.Play();
+
         // Logic for store bought power up
         bool coinMultiplierApplied = bool.Parse(PlayerPrefs.GetString("CoinMultiplier" + "Applied", "False"));
         float upper = 10f;

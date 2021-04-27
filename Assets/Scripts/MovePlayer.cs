@@ -12,6 +12,7 @@ public class MovePlayer : MonoBehaviour
     public float speed = 5; //initially set to 8
     public Rigidbody rb;
     public SkinnedMeshRenderer renderer;
+    public GameObject docIcon;
     int JumpCount = 0;
     bool dblJumpApplied = false;
     public int MaxJumps = 1; //Maximum amount of jumps (i.e. 2 for double jumps)
@@ -23,15 +24,20 @@ public class MovePlayer : MonoBehaviour
     public float speedIncreasePer100Points = 0.5f; //initially set to 1f
     public LayerMask groundMask;
     public GameObject extraHeart;
+    public AudioClip jumpClip;
 
     private void Start()
     {
+        float audioVal = PlayerPrefs.GetFloat("AudioValue", 0.5f);
+        GameManager.inst.audioSrc.volume = 0.8f*audioVal;
+
         GameManager.inst.gameStartTime = DateTime.Now;
         GameManager.inst.docTimeSeconds = 0;
         GameManager.inst.doctorModePoints = 0;
         GameManager.inst.cumulativeDocPoints = 0;
         GameManager.inst.cumulativeSupermanPoints = 0;
         GameManager.inst.supermanCount = 0;
+        docIcon.SetActive(false);
         horizontalMultiplier = PlayerPrefs.GetFloat("SensitivityValue", 1.7f);
         renderer = this.GetComponentInChildren<SkinnedMeshRenderer>();
         JumpCount = MaxJumps;
@@ -67,6 +73,8 @@ public class MovePlayer : MonoBehaviour
             if (JumpCount > 0)
             {
                 if (GameManager.inst.GetNoJumpStamp() < DateTime.Now) {
+                    GameManager.inst.audioSrc.clip = jumpClip;
+                    GameManager.inst.audioSrc.Play();
                     Jump();
                 }
             }
@@ -75,6 +83,8 @@ public class MovePlayer : MonoBehaviour
         {
             if (JumpCount > 0)
             {
+                GameManager.inst.audioSrc.clip = jumpClip;
+                GameManager.inst.audioSrc.Play();
                 if (GameManager.inst.GetNoJumpStamp() < DateTime.Now) {
                     DoubleJump();
                 }
@@ -140,9 +150,16 @@ public class MovePlayer : MonoBehaviour
     public void ChangeColor()
     {
         if (GameManager.inst.isDoctor)
+        {
+            docIcon.SetActive(true);
             renderer.material.SetColor("_Color", Color.yellow);
+        }
         else
+        {
+            docIcon.SetActive(false);
             renderer.material.SetColor("_Color", Color.white);
+        }
+           
     }
 
     public void OnCollisionEnter(Collision collision)

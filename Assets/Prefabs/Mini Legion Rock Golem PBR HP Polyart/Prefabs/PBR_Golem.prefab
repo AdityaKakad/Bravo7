@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada44153c21951a4685f6c577780bf25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  savedClip: {fileID: 8300000, guid: 78c7973960e1243a98d3e04077e7d37d, type: 3}
 --- !u!136 &3722146355137499617
 CapsuleCollider:
   m_ObjectHideFlags: 0

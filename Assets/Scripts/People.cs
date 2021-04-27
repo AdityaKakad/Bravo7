@@ -6,6 +6,7 @@ using UnityEngine;
 public class People : MonoBehaviour
 {
     MovePlayer playerMovement;
+    public AudioClip savedClip;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +40,8 @@ public class People : MonoBehaviour
                     else
                     {
                         GameManager.inst.IncrementScore(GameManager.inst.DOCTOR_POWER_POINT);
+                        GameManager.inst.audioSrc.clip = savedClip;
+                        GameManager.inst.audioSrc.Play();
                         GameManager.inst.peopleSaved++;
                     }
                 }
@@ -49,6 +52,8 @@ public class People : MonoBehaviour
             if (GameManager.inst.isDoctor)
             {
                 GameManager.inst.IncrementScore(GameManager.inst.DOCTOR_POWER_POINT);
+                GameManager.inst.audioSrc.clip = savedClip;
+                GameManager.inst.audioSrc.Play();
                 GameManager.inst.peopleSaved++;
             }
         }
