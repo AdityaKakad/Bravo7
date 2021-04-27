@@ -28,8 +28,8 @@ public class MovePlayer : MonoBehaviour
 
     private void Start()
     {
-        float audioVal = PlayerPrefs.GetFloat("AudioValue", 0.5f);
-        GameManager.inst.audioSrc.volume = 0.8f*audioVal;
+        float sfxVal = PlayerPrefs.GetFloat("SFXValue", 0.5f);
+        GameManager.inst.audioSrc.volume = sfxVal;
 
         GameManager.inst.gameStartTime = DateTime.Now;
         GameManager.inst.docTimeSeconds = 0;

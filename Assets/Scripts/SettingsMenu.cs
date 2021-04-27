@@ -11,6 +11,7 @@ public class SettingsMenu : MonoBehaviour
     public InputField playerName;
     public Slider audioSlider;
     public Slider sensitivitySlider;
+    public Slider sfxSlider;
     public ScoreSheet scoreMgr;
 
     public void BackToMain()
@@ -29,6 +30,7 @@ public class SettingsMenu : MonoBehaviour
         }
 
         PlayerPrefs.SetFloat("AudioValue", audioSlider.value);
+        PlayerPrefs.SetFloat("SFXValue", sfxSlider.value);
         PlayerPrefs.SetFloat("SensitivityValue", sensitivitySlider.value);
         //Instructions.gameObject.SetActive(true);
         SceneManager.LoadScene("Menu");
@@ -41,6 +43,7 @@ public class SettingsMenu : MonoBehaviour
     private void Update()
     {
         PlayerPrefs.SetFloat("AudioValue", audioSlider.value);
+        PlayerPrefs.SetFloat("SFXValue", sfxSlider.value);
     }
 
     private void Awake()
@@ -48,8 +51,10 @@ public class SettingsMenu : MonoBehaviour
         string name = PlayerPrefs.GetString("PlayerName", "Anonymous").ToString();
         float audioVal = PlayerPrefs.GetFloat("AudioValue", 0.5f);
         float sensitivityVal = PlayerPrefs.GetFloat("SensitivityValue", 1.7f);
+        float sfxVal = PlayerPrefs.GetFloat("SFXValue", 0.5f);
         audioSlider.value = audioVal;
         sensitivitySlider.value = sensitivityVal;
+        sfxSlider.value = sfxVal;
         playerName.text = name;
     }
 
