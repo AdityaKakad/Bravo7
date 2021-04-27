@@ -302,7 +302,7 @@ public class GameManager : MonoBehaviour
         guiText.text = "";
     }
 
-    public bool DecrementLives()
+    public bool DecrementLives(bool endGame = false)
     {
         Analytics.CustomEvent("Life Lost", new Dictionary<string, object>
               {
@@ -332,9 +332,12 @@ public class GameManager : MonoBehaviour
         {
             return false;
         }
-        
-        GameManager.inst.pointsPerLife = 0;
-        //livesText.text = "Lives left: " + livesLeft;
+
+        if (!endGame)
+        {
+            GameManager.inst.pointsPerLife = 0;
+            //livesText.text = "Lives left: " + livesLeft;
+        }
         return true;
     }
 

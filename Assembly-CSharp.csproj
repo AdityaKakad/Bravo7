@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\GroundSpawner.cs" />
     <Compile Include="Assets\Scripts\GroundTile.cs" />
     <Compile Include="Assets\Scripts\Highscores.cs" />
+    <Compile Include="Assets\Scripts\InGameMenu.cs" />
     <Compile Include="Assets\Scripts\InstructionsMenu.cs" />
     <Compile Include="Assets\Scripts\LeaderboardMenu.cs" />
     <Compile Include="Assets\Scripts\Mask.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Assets\Scripts\MovePlayer.cs" />
     <Compile Include="Assets\Scripts\MysteryBox.cs" />
     <Compile Include="Assets\Scripts\OverallBackground.cs" />
+    <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\People.cs" />
     <Compile Include="Assets\Scripts\ScoreSheet.cs" />
     <Compile Include="Assets\Scripts\SettingsMenu.cs" />

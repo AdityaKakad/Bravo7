@@ -26,13 +26,11 @@ public class MovePlayer : MonoBehaviour
     public LayerMask groundMask;
     public GameObject extraHeart;
     public AudioClip jumpClip;
-    public AudioSource mainSrc;
 
     private void Start()
     {
         float sfxVal = PlayerPrefs.GetFloat("SFXValue", 0.5f);
         GameManager.inst.audioSrc.volume = sfxVal;
-        //if(mainSrc!=null) mainSrc.Play();
         GameManager.inst.gameStartTime = DateTime.Now;
         GameManager.inst.docTimeSeconds = 0;
         GameManager.inst.doctorModePoints = 0;
@@ -129,7 +127,6 @@ public class MovePlayer : MonoBehaviour
             { "superman points", GameManager.inst.cumulativeSupermanPoints }
           });
         GameManager.inst.coinsCollectedPerGame = 0;
-        //if(mainSrc!=null) mainSrc.Stop();
         SceneManager.LoadScene("EndGame");
     }
 
