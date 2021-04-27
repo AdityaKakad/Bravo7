@@ -304,29 +304,34 @@ public class GameManager : MonoBehaviour
 
     public bool DecrementLives()
     {
-        GameManager.inst.audioSrc.clip = lifeLostClip;
-        audioSrc.Play();
         Analytics.CustomEvent("Life Lost", new Dictionary<string, object>
               {
                 { "Lives remaining", GameManager.inst.livesLeft },
                 { "Points Earned", GameManager.inst.pointsPerLife },
               });
 
-        if (livesLeft > 1) {
-            if(livesLeft == 4)
+        if (livesLeft > 1)
+        {
+            GameManager.inst.audioSrc.clip = lifeLostClip;
+            audioSrc.Play();
+            if (livesLeft == 4)
             {
                 heart4.GetComponent<Image>().color = Color.grey;
             }
-            else if (livesLeft == 3) {
+            else if (livesLeft == 3)
+            {
                 heart1.GetComponent<Image>().color = Color.grey;
             }
-            else if (livesLeft == 2) {
+            else if (livesLeft == 2)
+            {
                 heart2.GetComponent<Image>().color = Color.grey;
             }
             livesLeft--;
         }
         else
+        {
             return false;
+        }
         
         GameManager.inst.pointsPerLife = 0;
         //livesText.text = "Lives left: " + livesLeft;

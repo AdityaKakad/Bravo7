@@ -9,6 +9,14 @@ public class GameOverScore : MonoBehaviour
     public Text finalScoreText;
     public Text highScoreText;
     public Text gameOverText;
+    public AudioClip infectedClip;
+    public AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource.clip = infectedClip;
+        audioSource.Play();
+    }
 
     private void Awake()
     {
