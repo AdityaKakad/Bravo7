@@ -18,6 +18,9 @@ public class StoreItem : MonoBehaviour
     public string hoverText;
     public Text descriptionText;
     public int scoreUnlockLimit;
+    public AudioSource audioSrc;
+    public AudioClip applyClip;
+    public AudioClip buyClip;
 
     private void Awake()
     {
@@ -44,6 +47,11 @@ public class StoreItem : MonoBehaviour
     public void ToggleApply()
     {
         if (own <= 0 && !isApplied) return;
+        if (audioSrc != null && applyClip != null)
+        {
+            audioSrc.clip = applyClip;
+            audioSrc.Play();
+        }
         isApplied = !isApplied;
         PlayerPrefs.SetString(key + "Applied", isApplied.ToString());
         if (isApplied)
@@ -66,6 +74,10 @@ public class StoreItem : MonoBehaviour
         int coins = PlayerPrefs.GetInt("TotalCoins", 0);
         if (coins >= cost)
         {
+            if (audioSrc != null && buyClip != null) {
+                audioSrc.clip = buyClip;
+                audioSrc.Play();
+            }
             coins -= cost;
             own++;
             PlayerPrefs.SetInt(key + "Own", own);
