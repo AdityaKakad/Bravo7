@@ -69,6 +69,10 @@ public class GameManager : MonoBehaviour
         if (score <= 300) {
             playerMovement.speed = playerMovement.startSpeed + (score / 100) * playerMovement.speedIncreasePer100Points;
         }
+        if (score >= 1000)
+        {
+            playerMovement.speed = 0.8f*(playerMovement.startSpeed + (score / 300) * playerMovement.speedIncreasePer100Points);
+        }
         scoreText.text = "Score: " + score;
     }
 
@@ -90,6 +94,10 @@ public class GameManager : MonoBehaviour
         if (score <= 300)
         {
             playerMovement.speed = playerMovement.startSpeed + (score / 100) * playerMovement.speedIncreasePer100Points;
+        }
+        if (score >= 1000 && score <1200)
+        {
+            playerMovement.speed = 0.75f * (playerMovement.startSpeed + (score / 300) * playerMovement.speedIncreasePer100Points);
         }
         scoreText.text = "Score: " + score;
     }
