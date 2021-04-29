@@ -22,16 +22,9 @@ public class GroundTile : MonoBehaviour
 
     private void OnTriggerExit (Collider other)
     {
-    	groundSpawner.SpawnTile(true);
+        groundSpawner.SpawnTile(true);
     	Destroy(gameObject, 2);
     }
-
-    //public void manualTrigger()
-    //{
-    //    groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
-    //    groundSpawner.SpawnTile(true);
-    //    Destroy(gameObject);
-    //}
 
     // Update is called once per frame
     void Update()
@@ -44,6 +37,7 @@ public class GroundTile : MonoBehaviour
 
     public void SpawnObstacle (int tileSpawnIndex)
     {
+        if (!gameObject.active) return;
         //choose which obstacle to spawn
         GameObject obstacleToSpawn = obstaclePrefab;
         float random = Random.Range(0f, 1f);
@@ -117,12 +111,14 @@ public class GroundTile : MonoBehaviour
 
     public void SpawnPowerUps(GameObject tile)
     {
+        if (!gameObject.active) return;
         //choose which obstacle to spawn
         int powerUpLimit = Random.Range(3, this.powerupsToSpawn);
         for (int i=0; i<powerUpLimit; i++)
         {
             GameObject powerUp = spawnRandomPowerUp();
-            GameObject temp = Instantiate(powerUp, transform);
+            Vector3 position = GetRandomPointInCollider(GetComponent<Collider>(), powerUp);
+            GameObject temp = Instantiate(powerUp, position, powerUp.transform.rotation,transform);
             temp.transform.position = GetRandomPointInCollider(GetComponent<Collider>(), powerUp);
         }
     }
@@ -156,7 +152,7 @@ public class GroundTile : MonoBehaviour
     {
         Vector3 point = new Vector3(
             Random.Range(rightExtent.transform.position.x, leftExtent.transform.position.x),
-            Random.Range(collider.bounds.min.y, collider.bounds.max.y),
+            Random.Range(0.2f, 1.5f),
             Random.Range(behindExtent.transform.position.z, aheadExtent.transform.position.z)
             );
 

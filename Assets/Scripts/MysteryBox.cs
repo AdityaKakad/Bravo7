@@ -82,9 +82,9 @@ public class MysteryBox : MonoBehaviour
             }
         }
 
+        
+        idx = MysteryBoxLogic(idx, coinMultiplierApplied);
         string power = powerUp[idx];
-
-        MysteryBoxLogic(idx, coinMultiplierApplied);
 
         if (other.gameObject.GetComponent<MovePlayer>() != null)
         {
@@ -98,7 +98,7 @@ public class MysteryBox : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void MysteryBoxLogic(int choice, bool apply)
+    private int MysteryBoxLogic(int choice, bool apply)
     {
         //Mystery logic - Secret Sauce
         switch (choice)
@@ -139,6 +139,11 @@ public class MysteryBox : MonoBehaviour
                     {
                         GameManager.inst.SetNoJumpStamp();
                     }
+                    else
+                    {
+                        GameManager.inst.SetSuperManStamp();
+                        return 5;
+                    }
                 }
                 else
                     GameManager.inst.SetNoJumpStamp();
@@ -148,6 +153,7 @@ public class MysteryBox : MonoBehaviour
                     GameManager.inst.SetCoinMultiplierStamp();
                 break;
         }
+        return choice;
     }
 
     // Update is called once per frame
