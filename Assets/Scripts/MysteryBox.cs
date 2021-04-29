@@ -16,7 +16,8 @@ public class MysteryBox : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Virus>() != null ||
             other.gameObject.GetComponent<Bat>() != null ||
-            other.gameObject.GetComponent<People>() != null)
+            other.gameObject.GetComponent<People>() != null ||
+            other.gameObject.GetComponent<Arch>() != null)
         {
             Destroy(gameObject);
             return;
@@ -131,7 +132,16 @@ public class MysteryBox : MonoBehaviour
                 GameManager.inst.DecrementSyringe(5);
                 break;
             case 9:
-                GameManager.inst.SetNoJumpStamp();
+                if(GameManager.inst.score > 1000)
+                {
+                    float random = Random.Range(0f, 25f);
+                    if (random < 2f)
+                    {
+                        GameManager.inst.SetNoJumpStamp();
+                    }
+                }
+                else
+                    GameManager.inst.SetNoJumpStamp();
                 break;
             case 10:
                 if(apply)

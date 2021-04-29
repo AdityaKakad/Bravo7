@@ -26,6 +26,13 @@ public class GroundTile : MonoBehaviour
     	Destroy(gameObject, 2);
     }
 
+    //public void manualTrigger()
+    //{
+    //    groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
+    //    groundSpawner.SpawnTile(true);
+    //    Destroy(gameObject);
+    //}
+
     // Update is called once per frame
     void Update()
     {
@@ -71,7 +78,7 @@ public class GroundTile : MonoBehaviour
 
         int obstacleLimit = Random.Range(1, this.obstaclesToSpawn);
         Vector3 secondPosition;
-        if (obstacleLimit > 1 && GameManager.inst.score > 100)
+        if (obstacleLimit > 1 && GameManager.inst.score > 150)
         {
             int secondObstacleSpawnIndex = Random.Range(lowerBound, upperBound);
             Transform secondSpawnPoint = transform.GetChild(secondObstacleSpawnIndex).transform;
@@ -81,7 +88,7 @@ public class GroundTile : MonoBehaviour
             Instantiate(peoplePrefab, secondPosition, peoplePrefab.transform.rotation, transform);
 
             Vector3 thirdPosition;
-            if (obstacleLimit > 2)
+            if (obstacleLimit > 2 && GameManager.inst.score > 400)
             {
                 int thirdObstacleSpawnIndex = Random.Range(lowerBound, upperBound);
                 Transform thirdSpawnPoint = transform.GetChild(thirdObstacleSpawnIndex).transform;
@@ -111,6 +118,17 @@ public class GroundTile : MonoBehaviour
     public void SpawnPowerUps(GameObject tile)
     {
         //choose which obstacle to spawn
+        int powerUpLimit = Random.Range(3, this.powerupsToSpawn);
+        for (int i=0; i<powerUpLimit; i++)
+        {
+            GameObject powerUp = spawnRandomPowerUp();
+            GameObject temp = Instantiate(powerUp, transform);
+            temp.transform.position = GetRandomPointInCollider(GetComponent<Collider>(), powerUp);
+        }
+    }
+
+    public GameObject spawnRandomPowerUp()
+    {
         GameObject powerupsToSpawn = coinPrefab;
         float random = Random.Range(0f, 1f);
         double timeDiff = (DateTime.Now - GameManager.inst.GetMysteryBoxStamp()).TotalSeconds;
@@ -127,20 +145,14 @@ public class GroundTile : MonoBehaviour
         {
             powerupsToSpawn = maskPrefab;
         }
-        else if (random < syringeChance + deltaFactor) 
+        else if (random < syringeChance + deltaFactor)
         {
             powerupsToSpawn = syringePrefab;
         }
-
-        int powerUpLimit = Random.Range(3, this.powerupsToSpawn);
-        for (int i=0; i<powerUpLimit; i++)
-        {
-            GameObject temp = Instantiate(powerupsToSpawn, transform);
-            temp.transform.position = GetRandomPointInCollider(GetComponent<Collider>());
-        }
+        return powerupsToSpawn;
     }
 
-    Vector3 GetRandomPointInCollider(Collider collider)
+    Vector3 GetRandomPointInCollider(Collider collider, GameObject powerUp)
     {
         Vector3 point = new Vector3(
             Random.Range(rightExtent.transform.position.x, leftExtent.transform.position.x),
@@ -150,10 +162,12 @@ public class GroundTile : MonoBehaviour
 
         if (point == collider.ClosestPoint(point))
         {
-            point = GetRandomPointInCollider(collider);
+            point = GetRandomPointInCollider(collider, powerUp);
         }
 
-        point.y = 1;
+        float random = Random.Range(0f, 20f);
+        if (random < 19) point.y = 1;
+        else if(powerUp.GetComponent<MysteryBox>() != null) point.y = 4;
         return point;
     }
 }

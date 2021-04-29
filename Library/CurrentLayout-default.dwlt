@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 678, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 8162
+  controlID: 12209
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 402, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 8163
+  controlID: 12210
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_MinSize: {x: 402, y: 221}
   m_MaxSize: {x: 8002, y: 4021}
   vertical: 0
-  controlID: 8164
+  controlID: 12211
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -396,7 +396,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 7e3efdff963efdff3240fdff4240fdff4e40fdff6440fdff7040fdff7840fdff1641fdfff041fdfff441fdff70cbfdffcacdfdffcecdfdfffae6fdffb207feff9c25feff122dfeffb23dfeff4e3efeff963efeff6453feff8c6dfeff0e72feff5284feffe4e4feffeae5feff00e6feffa8e6feffbee6feffd4e6fefff6e6feffb8f5ffffbcf5ffff86620000a0620000ba620000cc62000088930000
+      m_ExpandedIDs: f83dffff103effffbc3effffc83effffd03effffe03effffe83effff843fffff1c40ffff5e45ffff6246fffff846ffff8a47ffff54f7ffff6afbffffa83400001665000066650000fc67000086680000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -601,20 +601,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/SFX
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/SFX
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\rushk\Desktop\CS books\CSCI 526\Bravo7
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 41}
-    m_SelectedIDs: 0e3c0000
-    m_LastClickedID: 15374
-    m_ExpandedIDs: 00000000b23b0000b43b0000b63b0000b83b0000ba3b0000bc3b0000be3b0000c43b0000c63b0000c83b0000ca3b0000cc3b0000ce3b0000d03b000000ca9a3b
+    m_SelectedIDs: f6380000
+    m_LastClickedID: 14582
+    m_ExpandedIDs: 00000000ac380000ae380000b0380000b2380000b4380000b6380000b8380000ba380000bc380000be380000c0380000c2380000c4380000c638000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -642,7 +642,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b23b0000b43b0000b63b0000b83b0000ba3b0000bc3b0000be3b0000c43b0000c63b0000c83b0000ca3b0000cc3b0000ce3b0000d03b000000ca9a3b
+    m_ExpandedIDs: 00000000ac380000ae380000b0380000b2380000b4380000b6380000b8380000ba380000bc380000be380000c0380000c2380000c4380000c638000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -669,7 +669,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000863a0000e43a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

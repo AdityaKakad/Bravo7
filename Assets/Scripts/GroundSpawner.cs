@@ -10,14 +10,26 @@ public class GroundSpawner : MonoBehaviour
 
     public void SpawnTile(bool spawnItems) 
     {
-    	GameObject temp = Instantiate(groundTile, nextSpawnPoint, Quaternion.identity);
+        int random = Random.Range(0, 20);
+
+        GameObject temp = Instantiate(groundTile, nextSpawnPoint, Quaternion.identity);
+        if (GameManager.inst.score <= 1000) random = 10;
+        if (random < 1)
+        {
+            temp.SetActive(false);
+            spawnItems = false;
+        }
         //Choosing rand point for tile
         int tileSpawnIndex = 1;
         if (spawnItems)
         {
             tileSpawnIndex = Random.Range(1, 4);
-            temp.GetComponent<GroundTile>().SpawnObstacle(tileSpawnIndex);
-            temp.GetComponent<GroundTile>().SpawnPowerUps(temp);
+            
+            if (random >= 1)
+            {
+                temp.GetComponent<GroundTile>().SpawnObstacle(tileSpawnIndex);
+                temp.GetComponent<GroundTile>().SpawnPowerUps(temp);
+            }
         }
         nextSpawnPoint = temp.transform.GetChild(tileSpawnIndex).transform.position;
     }

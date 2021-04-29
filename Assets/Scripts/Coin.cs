@@ -14,7 +14,8 @@ public class Coin : MonoBehaviour
 
         if (other.gameObject.GetComponent<Virus>() != null ||
             other.gameObject.GetComponent<Bat>() != null ||
-            other.gameObject.GetComponent<People>() != null)
+            other.gameObject.GetComponent<People>() != null ||
+            other.gameObject.GetComponent<Arch>() != null)
         {
             Destroy(gameObject);
             return;
