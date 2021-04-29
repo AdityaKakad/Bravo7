@@ -1852,7 +1852,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 628, y: -174}
+  m_AnchoredPosition: {x: 639, y: -196}
   m_SizeDelta: {x: 250, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1200831602
@@ -2792,7 +2792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 732, y: 388}
+  m_AnchoredPosition: {x: 732, y: 437}
   m_SizeDelta: {x: 1000, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1519599907
@@ -2814,18 +2814,22 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score more points to unlock cool powers in store!
+  m_text: 'Play more to unlock mystery obstacles and powerups!
 
 
-    Use collected
-    coins to buy powers from store!
+    Score more points
+    to unlock cool powers in store!
 
 
-    Play daily to collect rewards and complete
-    tasks!
+    Use collected coins to buy powers from
+    store!
 
 
-    Flex your high score on LeaderBoard and get rewarded!
+    Login daily to collect rewards and complete tasks!
+
+
+    Flex your
+    high score on LeaderBoard and get rewarded!
 
 
 
@@ -2940,7 +2944,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 781, y: 393}
+  m_AnchoredPosition: {x: 781, y: 448}
   m_SizeDelta: {x: 1000, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1524877441
@@ -2966,18 +2970,22 @@ MonoBehaviour:
 
 
     Superman
-    Drive-FREE Timed Run! Be invincible
+    Drive - FREE Immune Timed Run! Be invincible
 
 
-    Vaccine - Get an extra life upto 3
+    Vaccine - Get an extra life
+    upto 3
 
 
-    Collectible
-    flux - Increases/ decreases your coin, masks and syringes
+    Collectible flux - Increases/ decreases your coin, masks and syringes
 
 
+    Combine
+    mystery boxes to boost scoring chances!
 
 
+    Superman + Doctor - Save people
+    without losing power-ups!
 
 '
   m_isRightToLeft: 0
@@ -3987,7 +3995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -88, y: 129}
+  m_AnchoredPosition: {x: -62, y: 129}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1836380437
@@ -4448,7 +4456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 543, y: -125}
+  m_AnchoredPosition: {x: 543, y: -239}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1962384451
