@@ -267,7 +267,7 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 1067925524328404, guid: 6bbfea6690ef7724ba495c866081f855,
     type: 3}
   obstaclesToSpawn: 3
-  maskPrefab: {fileID: 3969026384833104512, guid: 13fb455f5c69ccc4c87feb35091ed0be,
+  maskPrefab: {fileID: 3829378805877733817, guid: efaaa311dc7cc7b4fbec4593fa5fcec3,
     type: 3}
   syringePrefab: {fileID: 3013271967029255879, guid: 18ea5314626d29f44a9e03e2ef723594,
     type: 3}
